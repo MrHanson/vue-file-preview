@@ -1,6 +1,15 @@
 {
-  "name": "vue-file-preview",
+  "name": "@mrhanson/vue-file-preview",
   "version": "0.1.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "dist/lib/file-preview.common.js",
+  "style": "dist/lib/file-preview.css",
+  "files": [
+    "release",
+    "src"
+  ],
   "description": "A file preview component by Vue",
   "author": {
     "name": "mrhanson",
@@ -27,12 +36,6 @@
     "test:unit": "vue-cli-service test:unit",
     "test:unit:cover": "vue-cli-service test:unit --coverage"
   },
-  "main": "dist/lib/file-preview.common.js",
-  "style": "dist/lib/file-preview.css",
-  "files": [
-    "release",
-    "src"
-  ],
   "dependencies": {
     "@toast-ui/vue-editor": "^1.1.1",
     "core-js": "^2.6.5",
