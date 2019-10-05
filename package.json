@@ -1,0 +1,90 @@
+{
+  "name": "vue-file-preview",
+  "version": "0.1.0",
+  "description": "A file preview component by Vue",
+  "author": {
+    "name": "mrhanson",
+    "email": "chihanghanson@gmail.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MrHanson/vue-file-preview"
+  },
+  "bugs": {
+    "url": "https://github.com/MrHanson/vue-file-preview/issues"
+  },
+  "scripts": {
+    "dev": "yarn && vue-cli-service serve --open",
+    "lint": "vue-cli-service lint",
+    "release": "node scripts/release.js",
+    "release:gh-pages": "git subtree push --prefix=docs/.vuepress/dist origin gh-pages",
+    "build": "npm run build:wc && npm run build:lib",
+    "build:wc": "cross-env BUILD_MODE=wc vue-cli-service build --target wc-async src/package/*.vue",
+    "build:lib": "vue-cli-service build --target lib --name file-preview src/index.js",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
+    "test:unit": "vue-cli-service test:unit",
+    "test:unit:cover": "vue-cli-service test:unit --coverage"
+  },
+  "main": "dist/lib/file-preview.common.js",
+  "style": "dist/lib/file-preview.css",
+  "files": [
+    "release",
+    "src"
+  ],
+  "dependencies": {
+    "@toast-ui/vue-editor": "^1.1.1",
+    "core-js": "^2.6.5",
+    "viewerjs": "^1.3.6",
+    "xlsx": "^0.15.1"
+  },
+  "peerDependencies": {
+    "vue": "^2.6.10"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.10.0",
+    "@vue/cli-plugin-eslint": "^3.10.0",
+    "@vue/cli-plugin-unit-jest": "^3.10.0",
+    "@vue/cli-service": "^3.10.0",
+    "@vue/eslint-config-prettier": "^5.0.0",
+    "@vue/test-utils": "1.0.0-beta.29",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^23.6.0",
+    "compression-webpack-plugin": "^3.0.0",
+    "conventional-changelog": "^3.1.10",
+    "cross-env": "^6.0.0",
+    "element-ui": "^2.12.0",
+    "eslint": "^5.16.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "execa": "^2.0.5",
+    "inquirer": "^7.0.0",
+    "less": "^3.0.4",
+    "less-loader": "^4.1.0",
+    "lint-staged": "^8.1.5",
+    "normalize.css": "^8.0.1",
+    "prettier": "^1.18.2",
+    "semver": "^6.3.0",
+    "style-loader": "^1.0.0",
+    "vue-template-compiler": "^2.6.10",
+    "vuepress": "^1.0.3",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "keywords": [
+    "vue-file-preview",
+    "vue",
+    "component",
+    "web-component"
+  ],
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,vue}": [
+      "vue-cli-service lint",
+      "git add"
+    ]
+  }
+}

@@ -1,0 +1,24 @@
+{
+  // See http://go.microsoft.com/fwlink/?LinkId=827846 to learn about workspace recommendations.
+  // Extension identifier format: ${publisher}.${name}. Example: vscode.csharp
+
+  // List of extensions which should be recommended for users of this workspace.
+  "recommendations": [
+    // Syntax highlighting and more for .vue files
+    // https://github.com/vuejs/vetur
+    "octref.vetur",
+    // Lint-on-save with ESLint
+    // https://github.com/Microsoft/vscode-eslint
+    "dbaeumer.vscode-eslint",
+    // Format-on-save with Prettier
+    "esbenp.prettier-vscode",
+    // LESS intellisense
+    "mrmlnc.vscode-less",
+    // Test `.unit.js` files on save with Jest
+    "Orta.vscode-jest",
+    // Lint markdown in README files
+    "DavidAnson.vscode-markdownlint",
+    // supercharges the Git capabilities built into Visual Studio Code. It helps you to visualize code authorship at a glance via Git blame annotations and code lens, seamlessly navigate and explore Git repositories, gain valuable insights via powerful comparison commands, and so much more.
+    "eamodio.gitlens"
+  ]
+}
