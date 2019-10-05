@@ -1,5 +1,7 @@
 # vue-file-preview
 
+[![npm](https://img.shields.io/npm/v/@mrhanson/vue-file-preview.svg)](https://www.npmjs.com/package/@mrhanson/vue-file-preview)![License](https://img.shields.io/npm/l/@mrhanson/vue-file-preview)
+
 ## Description
 
 - A file preview component by Vue
