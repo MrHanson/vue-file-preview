@@ -24,7 +24,7 @@
     "url": "https://github.com/MrHanson/vue-file-preview/issues"
   },
   "scripts": {
-    "dev": "yarn && vue-cli-service serve --open",
+    "dev": "vue-cli-service serve --open",
     "lint": "vue-cli-service lint",
     "release": "node scripts/release.js",
     "release:gh-pages": "git subtree push --prefix=docs/.vuepress/dist origin gh-pages",

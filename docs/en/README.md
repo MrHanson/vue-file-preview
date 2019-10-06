@@ -23,10 +23,10 @@
 
 ```bash
   npm install vue
-  npm install 'vue-file-preview'
+  npm install '@mrhanson/vue-file-preview'
   # or
   yarn add vue
-  yarn add 'vue-file-preview'
+  yarn add '@mrhanson/vue-file-preview'
 ```
 
 ### Usage
