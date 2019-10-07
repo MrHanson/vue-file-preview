@@ -3,7 +3,7 @@ export function isString(variable) {
 }
 
 export function isObject(variable) {
-  return typeof variable === 'object'
+  return typeof variable === 'object' && variable !== null
 }
 
 export function isArray(obj) {

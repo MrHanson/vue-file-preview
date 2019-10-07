@@ -8,24 +8,23 @@ export default {
   render: function(h) {
     switch (this.fileType) {
       case 'md':
-        return h('md-previewer', {
-          props: this.mdPvProps,
-          on: {
-            'text-change': this._handleMdPvTextChange
-          },
-          ref: 'mdPV'
-        })
-      case 'img':
-        return h(
-          'img-previewer',
-          {
-            props: this.imgPvProps,
-            ref: 'imgPV'
-          },
-          [h('template', { slot: 'error' }, this.$slots.img_error)]
+        return (
+          <md-previewer
+            {...{ attrs: this.mdPvProps }}
+            vOn:text-change={this._handleMdPvTextChange}
+            ref="mdPV"
+          ></md-previewer>
         )
-      default:
-        return h()
+      case 'img':
+        return (
+          <img-previewer
+            {...{ attrs: this.imgPvProps }}
+            scopedSlots={{
+              error: () => this.$slots.img_error
+            }}
+            ref="imgPV"
+          ></img-previewer>
+        )
     }
   },
   props: {
@@ -43,6 +42,7 @@ export default {
         previewStyle: 'vertical'
       })
     },
+    /** img-previewer props */
     imgPvProps: {
       type: Object,
       default: null
@@ -60,7 +60,7 @@ export default {
       }
     },
     _handleMdPvTextChange(val) {
-      this.$emit('mdpv-text-change', val)
+      this.$emit('md-text-change', val)
     }
   }
 }

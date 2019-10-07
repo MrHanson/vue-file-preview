@@ -12,7 +12,6 @@ module.exports = {
   },
   chainWebpack: config => {
     config.module.rule('js').exclude.add(/dist/)
-    config.resolve.alias.set('$', './node_modules/')
   },
   configureWebpack: config => {
     // close webpack performace warning

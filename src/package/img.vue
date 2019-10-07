@@ -14,20 +14,20 @@
         </ul>
       </div>
     </template>
-    <template v-else-if="previewSrcList.length == 0">
+    <template v-else-if="pvSrcList.length == 0">
       <div class="image_error">
         <slot name="error">加载失败</slot>
       </div>
     </template>
     <div ref="container" id="container" style="display: none">
       <ul>
-        <li v-for="(item, index) in previewSrcList" :key="index">
+        <li v-for="(item, index) in pvSrcList" :key="index">
           <img :src="item" />
         </li>
       </ul>
     </div>
     <div
-      v-show="cSrcList.length === 0 && previewSrcList.length > 0"
+      v-show="cSrcList.length === 0 && pvSrcList.length > 0"
       class="only-preview-mask"
     ></div>
   </div>
@@ -43,7 +43,7 @@ export default {
   name: 'ImgPreviewer',
   props: {
     coverSrcList: { type: [Array, String], default: () => [] },
-    previewSrcList: { type: Array, default: () => [] },
+    previewSrcList: { type: [Array, String], default: () => [] },
     width: { type: String, default: '100px' },
     height: { type: String, default: '100px' },
     alt: { type: String, default: '' },
@@ -56,6 +56,9 @@ export default {
     cSrcList() {
       /* convert props coverSrcList to Array */
       return arrayPropsConvert(this.coverSrcList, this.width, this.height)
+    },
+    pvSrcList() {
+      return arrayPropsConvert(this.previewSrcList)
     }
   },
   data() {
@@ -78,9 +81,11 @@ export default {
   },
   methods: {
     openViewer(index = 0) {
-      const len = this.previewSrcList.length
+      const len = this.pvSrcList.length
       if (len > 0 && index < len) {
         this.imgViewer.view(index)
+      } else {
+        this.imgViewer.view(len - 1)
       }
     },
     _onlyPreviewMode(onlyPreview) {
@@ -96,11 +101,19 @@ export default {
  * @param gh{String} global height
  */
 function arrayPropsConvert(srcList, gw, gh) {
-  let ori = []
+  let ori
   if (!Array.isArray(srcList)) {
-    ori = JSON.parse(srcList)
+    try {
+      ori = JSON.parse(srcList)
+    } finally {
+      ori = []
+    }
   } else {
     ori = [...srcList]
+  }
+
+  if (!gw && !gw) {
+    return ori
   }
 
   const res = []
@@ -125,7 +138,7 @@ function arrayPropsConvert(srcList, gw, gh) {
 
 <style lang="less" scoped>
 #img-previewer {
-  overflow: hidden;
+  overflow: auto;
   .cover {
     cursor: pointer;
   }
