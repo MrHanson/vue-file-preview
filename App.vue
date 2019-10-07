@@ -71,6 +71,8 @@
           <el-form-item label="coverSrcList">
             <el-input v-model="operationProps.imgPvProps.coverSrcList[0]">
             </el-input>
+            <el-input v-model="operationProps.imgPvProps.coverSrcList[1]">
+            </el-input>
           </el-form-item>
           <el-form-item label="width">
             <el-input v-model="operationProps.imgPvProps.width"> </el-input>
@@ -101,7 +103,10 @@ export default {
         },
         imgPvProps: {
           coverSrcList: [
-            'https://fuss10.elemecdn.com/0/6f/e35ff375812e6b0020b6b4e8f9583jpeg.jpeg'
+            'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
+            'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg',
+            'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg',
+            'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg'
           ],
           width: '500px',
           height: '400px',
@@ -147,6 +152,7 @@ body {
   height: 100%;
   .demo {
     flex: 7;
+    overflow-x: hidden;
     transition: 0.2s;
     .image-slot {
       font-size: 20px;
