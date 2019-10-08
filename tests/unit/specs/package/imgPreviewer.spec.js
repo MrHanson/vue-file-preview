@@ -36,6 +36,7 @@ describe('coverSrcList', () => {
       }
     })
 
+    /* mounted */
     while (wrapper.options.attachedToDocument) {
       const img = wrapper.find('.cover-container img')
       img.trigger('click', { index: 0 })
@@ -61,6 +62,7 @@ describe('only preview mode', () => {
         previewSrcList: simpleSrcList
       }
     })
+
     /* mounted */
     while (wrapper.options.attachedToDocument) {
       expect(wrapper.vm.imgViewer.isShown).toBe(true)

@@ -1,10 +1,15 @@
 // prettier-ignore
-import {isString, isObject, isArray, isEqual } from '@/utils/type'
+import {isString, isObject, isFunction, isArray, isEqual } from '@/utils/type'
 
 describe('type vertification', () => {
   it('isString', () => {
     const ori = 'abc'
     expect(isString(ori)).toBe(true)
+  })
+
+  it('isFunction', () => {
+    const fn = () => {}
+    expect(isFunction(fn)).toBe(true)
   })
 
   it('isObject', () => {

@@ -30,7 +30,7 @@ export function isEqual(a, b) {
   return Object.is(a, b)
 }
 
-export function getTag(value) {
+function getTag(value) {
   if (value == null) {
     return value === undefined ? '[object Undefined]' : '[object Null]'
   }

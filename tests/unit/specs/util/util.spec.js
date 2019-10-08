@@ -1,7 +1,12 @@
 // prettier-ignore
-import {Obj2Arr, str2Arr, getAlphaArr } from '@/utils/util'
+import { isHttpUrl, Obj2Arr, str2Arr, getAlphaArr } from '@/utils/util'
 
 describe('convert', () => {
+  it('isHttpUrl', () => {
+    const str = 'https:github.com'
+    expect(isHttpUrl(str)).toBe(false)
+  })
+
   it('Obj2Arr', () => {
     const ori = { col1: 'dfb', col2: 'bcg' }
     // prettier-ignore
