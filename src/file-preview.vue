@@ -1,6 +1,7 @@
 <script>
 import MdPreviewer from '@/package/md.vue'
 import ImgPreviewer from '@/package/img.vue'
+import './style.css'
 
 export default {
   name: 'FilePreview',
