@@ -1,4 +1,12 @@
 /**
+ * @param {String} str
+ * @return {Boolean}
+ */
+export function isHttpUrl(str) {
+  return new RegExp(/http/g).test(str)
+}
+
+/**
  * @param {File} f
  * @param {Function} cb
  * @return {Uint8Array}

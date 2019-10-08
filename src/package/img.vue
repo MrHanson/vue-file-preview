@@ -1,33 +1,54 @@
 <template>
   <div id="img-previewer">
-    <template v-if="cSrcList.length > 0">
+    <template v-if="cList.length > 0">
       <div class="cover-container">
         <ul>
-          <li v-for="(item, index) in cSrcList" :key="index">
+          <li v-for="(item, index) in cList" :key="item.key || index">
+            <v-node v-if="isFunction(item)" :node="item()"></v-node>
+            <v-node v-else-if="item.render" :node="item.render()"></v-node>
             <img
+              v-else-if="isObject(item)"
+              :style="item.style"
               :src="item.src"
               :width="item.width"
               :height="item.height"
+              :alt="item.alt"
               @click="openViewer(index)"
             />
+            <div v-else :style="{ width, height }">
+              <i
+                :style="{ 'line-height': height, 'font-size': iconFontSize }"
+                class="iconfont"
+              >
+                &#xe609;
+              </i>
+            </div>
           </li>
         </ul>
       </div>
     </template>
-    <template v-else-if="pvSrcList.length == 0">
+    <template v-else-if="previewSrcList.length == 0">
       <div class="image_error">
         <slot name="error">加载失败</slot>
       </div>
     </template>
     <div ref="container" id="container" style="display: none">
       <ul>
-        <li v-for="(item, index) in pvSrcList" :key="index">
-          <img :src="item" />
+        <li v-for="(item, index) in previewSrcList" :key="index">
+          <img v-if="isHttpUrl(item)" :src="item" />
+          <div v-else :style="{ width, height }">
+            <i
+              :style="{ 'line-height': height, 'font-size': iconFontSize }"
+              class="iconfont"
+            >
+              &#xe609;
+            </i>
+          </div>
         </li>
       </ul>
     </div>
     <div
-      v-show="cSrcList.length === 0 && pvSrcList.length > 0"
+      v-show="coverList.length === 0 && previewSrcList.length > 0"
       class="only-preview-mask"
     ></div>
   </div>
@@ -36,14 +57,16 @@
 <script>
 /* Viewer.js */
 import ImgViewer from 'viewerjs'
+import VNode from '@/components/v-node.js'
 import 'viewerjs/dist/viewer.css'
-import { isObject } from '@/utils/type'
+import { isFunction, isObject, isString } from '@/utils/type'
+import { isHttpUrl } from '@/utils/util'
 
 export default {
   name: 'ImgPreviewer',
   props: {
-    coverSrcList: { type: [Array, String], default: () => [] },
-    previewSrcList: { type: [Array, String], default: () => [] },
+    coverList: { type: Array, default: () => [] },
+    previewSrcList: { type: Array, default: () => [] },
     width: { type: String, default: '100px' },
     height: { type: String, default: '100px' },
     alt: { type: String, default: '' },
@@ -53,12 +76,14 @@ export default {
     }
   },
   computed: {
-    cSrcList() {
-      /* convert props coverSrcList to Array */
-      return arrayPropsConvert(this.coverSrcList, this.width, this.height)
+    cList() {
+      return arrayPropsConvert(this.coverList, this.width, this.height)
     },
-    pvSrcList() {
-      return arrayPropsConvert(this.previewSrcList)
+    iconFontSize() {
+      const regx = /\d+/g
+      const w = this.width.match(regx),
+        h = this.height.match(regx)
+      return Math.min(w, h) + 'px'
     }
   },
   data() {
@@ -68,7 +93,7 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      const onlyPreview = this.cSrcList.length === 0
+      const onlyPreview = this.cList.length === 0
       this._onlyPreviewMode(onlyPreview)
       this.imgViewer = new ImgViewer(
         this.$refs['container'],
@@ -79,9 +104,12 @@ export default {
       }
     })
   },
+  components: {
+    VNode
+  },
   methods: {
     openViewer(index = 0) {
-      const len = this.pvSrcList.length
+      const len = this.previewSrcList.length
       if (len > 0 && index < len) {
         this.imgViewer.view(index)
       } else {
@@ -91,7 +119,10 @@ export default {
     _onlyPreviewMode(onlyPreview) {
       this.viewerOptions.button = !onlyPreview
       this.viewerOptions.backdrop = !onlyPreview
-    }
+    },
+    isObject,
+    isFunction,
+    isHttpUrl
   }
 }
 
@@ -100,37 +131,41 @@ export default {
  * @param gw{String} global width
  * @param gh{String} global height
  */
-function arrayPropsConvert(srcList, gw, gh) {
-  let ori
-  if (!Array.isArray(srcList)) {
-    try {
-      ori = JSON.parse(srcList)
-    } finally {
-      ori = []
-    }
-  } else {
-    ori = [...srcList]
-  }
-
-  if (!gw && !gw) {
-    return ori
-  }
+function arrayPropsConvert(list, gw, gh) {
+  let ori = [...list]
 
   const res = []
   for (let i = 0, len = ori.length; i < len; i++) {
     const item = ori[i]
-    const tmp = {}
-    if (isObject(item)) {
-      if (!item.src) continue
-      tmp.src = item.src
-      tmp.width = item.width ? item.width : gw
-      tmp.height = item.height ? item.height : gh
-    } else {
-      tmp.src = item
-      tmp.width = gw
-      tmp.height = gh
+    const tmp = {
+      width: gw,
+      height: gh,
+      style: {}
     }
-    res.push(tmp)
+
+    if (isFunction(item)) {
+      res.push(item)
+      continue
+    } else if (isObject(item)) {
+      /* render component */
+      if (item.render) {
+        res.push(item)
+        continue
+      }
+
+      tmp.src = item.src || ''
+      tmp.width = item.width || gw
+      tmp.height = item.height || gh
+      tmp.style = item.style || {}
+    } else if (isString(item)) {
+      tmp.src = item
+    }
+
+    if (tmp.src && isHttpUrl(tmp.src)) {
+      res.push(tmp)
+    } else {
+      res.push('404')
+    }
   }
   return res
 }
@@ -160,7 +195,10 @@ function arrayPropsConvert(srcList, gw, gh) {
     li {
       list-style: none;
       text-decoration: none;
-      cursor: pointer;
+      text-align: center;
+      img {
+        cursor: pointer;
+      }
     }
   }
   .only-preview-mask {
