@@ -65,7 +65,6 @@ const release = async () => {
       ['version', version, '-m', `build: release ${version}`],
       { stdio: 'inherit' }
     )
-    await execa('git', ['tag', '-a', `v${version}`], { stdio: 'inherit' })
   }
 
   require('./gen-changelog')(version)

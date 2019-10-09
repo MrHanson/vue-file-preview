@@ -9,17 +9,15 @@
 
 - 目前支持
 
-  - [markdown](/chapter/md-preview/)
-  - [img](/chapter/img-preview/)
+  - [markdown](/chapter/md-previewer/)
+  - [img](/chapter/img-previewer/)
 
 - 未来支持
 
   - excel
   - docx
 
-## 快速上手
-
-### 安装
+## 安装
 
 ```bash
   // npm
@@ -30,9 +28,11 @@
   yarn add '@mrhanson/vue-file-preview'
 ```
 
-### 使用
+## 使用
 
-- ES Module
+### ES Module
+
+- 全局注册
 
 ```js
 // Vue app entry file
@@ -42,4 +42,19 @@ import 'vue-file-preview/dist/lib/file-preview.css'
 Vue.use(FilePreview)
 ```
 
-- web-component[详情](/chapter/file-preview/WebComponent.md)
+- 局部注册
+
+```html
+<template>
+  <file-preview />
+</template>
+
+<script>
+  import FilePreview from '@mrhanson/vue-file-preview'
+  export default {
+    components: {
+      FilePreview
+    }
+  }
+</script>
+```

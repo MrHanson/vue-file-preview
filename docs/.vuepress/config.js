@@ -1,53 +1,11 @@
 const version = process.env.VERSION || require('../../package.json').version
 
-const sidebarMixin = [
-  ['/', '基本使用'],
-  {
-    title: '基本配置',
-    collapsable: false,
-    children: [['/chapter/file-preview/Attribute.md', '属性']]
-  },
-  {
-    title: 'previewer组件详情',
-    collapsable: false,
-    children: [
-      {
-        title: 'md-previewer',
-        children: [['/chapter/md-previewer/', '基本使用']]
-      },
-      {
-        title: 'img-previewer',
-        children: [['/chapter/img-previewer/', '基本使用']]
-      }
-    ]
-  }
-]
-
-const sidebarMixinEn = [
-  ['/en/', 'Basic Usage'],
-  {
-    title: 'Basic Configuration',
-    collapsable: false,
-    children: [['/en/chapter/file-preview/Attribute.md', 'Attributes']]
-  },
-  {
-    title: 'Previewer Detail',
-    collapsable: false,
-    children: [
-      {
-        title: 'md-previewer',
-        children: [['/en/chapter/md-previewer/', 'Basic Usage']]
-      },
-      {
-        title: 'img-previewer',
-        children: [['/en/chapter/img-previewer/', 'Basic Usage']]
-      }
-    ]
-  }
-]
-
 module.exports = {
   base: '/vue-file-preview/',
+  description: 'vue-file-preview docs',
+  markdown: {
+    lineNumbers: true
+  },
   locales: {
     '/': {
       lang: 'zh-CN',
@@ -58,13 +16,13 @@ module.exports = {
       title: `Vue File Preview v${version}`
     }
   },
-  description: 'vue-file-preview docs',
   themeConfig: {
-    displayAllHeaders: true,
     locales: {
       '/': {
+        lang: 'zh-CN',
         selectText: '选择语言',
         label: '简体中文',
+        lastUpdated: '上次更新',
         nav: [
           { text: '基本使用', link: '/' },
           {
@@ -80,22 +38,23 @@ module.exports = {
           }
         ],
         sidebar: {
-          '/chapter/md-previewer/': [
+          '/': [
+            ['/', '基本使用'],
             {
+              title: '开发指南',
               collapsable: false,
-              children: sidebarMixin
+              children: [
+                ['/chapter/file-preview/Props.md', 'Props一览'],
+                ['/chapter/file-preview/Events.md', 'Events'],
+                ['/chapter/md-previewer/', 'md-previewer'],
+                ['/chapter/img-previewer/', 'img-previewer']
+              ]
             }
-          ],
-          '/chapter/img-previewer/': [
-            {
-              collapsable: false,
-              children: sidebarMixin
-            }
-          ],
-          '/': sidebarMixin
+          ]
         }
       },
       '/en/': {
+        lang: 'en-US',
         selectText: 'Languages',
         label: 'English',
         ariaLabel: 'Languages',
@@ -114,21 +73,19 @@ module.exports = {
           }
         ],
         sidebar: {
-          '/en/chapter/md-previewer/': [
+          '/en/': [
+            ['/en/', 'Basic Usage'],
             {
-              title: 'md-previewer',
+              title: 'Dev Guide',
               collapsable: false,
-              children: sidebarMixinEn
+              children: [
+                ['/en/chapter/file-preview/Props.md', 'Props'],
+                ['/en/chapter/file-preview/Events.md', 'Events'],
+                ['/en/chapter/md-previewer/', 'md-previewer'],
+                ['/en/chapter/img-previewer/', 'img-previewer']
+              ]
             }
-          ],
-          '/en/chapter/img-previewer/': [
-            {
-              title: 'img-previewer',
-              collapsable: false,
-              children: sidebarMixinEn
-            }
-          ],
-          '/en/': (() => sidebarMixinEn)()
+          ]
         }
       }
     }

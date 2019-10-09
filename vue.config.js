@@ -4,7 +4,7 @@ module.exports = {
       entry: 'example'
     }
   },
-  outputDir: process.env.BUILD_MODE === 'wc' ? 'release/wc' : 'release/lib',
+  outputDir: 'release',
   productionSourceMap: false,
   css: {
     sourceMap: process.env.NODE_ENV !== 'production',

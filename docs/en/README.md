@@ -39,5 +39,3 @@ import Vue from 'vue'
 import FilePreview from 'vue-file-preview'
 Vue.use(FilePreview)
 ```
-
-- web-component[Detail](/chapter/file-preview/WebComponent.md)

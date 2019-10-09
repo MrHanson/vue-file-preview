@@ -1,4 +1,4 @@
-# file-preview Attributes
+# file-preview Props
 
 ## fileType
 

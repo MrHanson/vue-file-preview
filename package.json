@@ -4,8 +4,8 @@
   "publishConfig": {
     "access": "public"
   },
-  "main": "dist/lib/file-preview.common.js",
-  "style": "dist/lib/file-preview.css",
+  "main": "release/file-preview.common.js",
+  "style": "release/file-preview.css",
   "files": [
     "release",
     "src"
@@ -27,7 +27,7 @@
     "dev": "vue-cli-service serve --open",
     "lint": "vue-cli-service lint",
     "release": "node scripts/release.js",
-    "release:gh-pages": "git subtree push --prefix=docs/.vuepress/dist origin gh-pages",
+    "release:gh-pages": "git push -f origin gh-pages && git subtree push --prefix=docs/.vuepress/dist origin gh-pages",
     "build": "vue-cli-service build --target lib --name file-preview src/index.js",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
@@ -76,8 +76,7 @@
   "keywords": [
     "vue-file-preview",
     "vue",
-    "component",
-    "web-component"
+    "component"
   ],
   "gitHooks": {
     "pre-commit": "lint-staged"

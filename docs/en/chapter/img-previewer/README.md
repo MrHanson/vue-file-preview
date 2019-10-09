@@ -47,23 +47,23 @@ export default {
 ## Attributes
 
 <!-- prettier-ignore -->
-| parameter     | description         | type   | options | default |
+| Name     | Description         | Type   | Option | Default |
 | -------- | ------------ | ------ | ------ | ------ |
-| coverSrcList | cover pic list | Array, String | ---    | ---    |
-| width    | cover item default width | String | ---    | 100px  |
-| height   | cover item default height | String | ---    | 100px  |
-| alt      | same as origin alt   | String | ---    | ---    |
-| previewSrcList | preview pic list | Array | --- | --- |
-| viewerOptions | [viwerOptions](https://github.com/fengyuanchen/viewerjs#options) | Object | --- | --- |
+| coverList | [more detail](/chapter/img-previewer/CoverList.md) | `Array` | ---    | ---    |
+| width    | CoverItem default width | `String` | ---    | `100px`  |
+| height   | CoverItem default height | `String` | ---    | `100px`  |
+| alt      | same as alt   | `String` | ---    | ---    |
+| previewSrcList | preview source path list | `Array` | --- | --- |
+| viewerOptions | [detail](https://github.com/fengyuanchen/viewerjs#options) | `Object` | --- | --- |
 
 ## Methods
 
-| name       | description          | parameter |
-| ---------- | -------------------- | --------- |
-| openViewer | open viewer by index | index     |
+| Name       | Description                           | Callback params   |
+| ---------- | ------------------------------------- | ----------------- |
+| openViewer | open the viewer of specific index pic | `(index: Number)` |
 
 ## Slots
 
-| name  | description        |
-| ----- | ------------------ |
-| error | error slot content |
+| Name  | Description     |
+| ----- | --------------- |
+| error | show when error |

@@ -59,6 +59,6 @@ export default {
 
 ## Events
 
-| event       | description           | callback param |
-| ----------- | --------------------- | -------------- |
-| text-change | call when text change | current text   |
+| event       | description           | callback param   |
+| ----------- | --------------------- | ---------------- |
+| text-change | call when text change | `(text: string)` |
