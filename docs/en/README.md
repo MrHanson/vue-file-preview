@@ -7,15 +7,7 @@
 
 ## File Type Support
 
-- Current State
-
-  - [markdown](/chapter/md-preview/)
-  - [img](/chapter/img-preview/)
-
-- Next State
-
-  - excel
-  - docx
+<feat-box />
 
 ## QuickStart
 
@@ -36,6 +28,21 @@
 ```js
 // Vue app entry file
 import Vue from 'vue'
-import FilePreview from 'vue-file-preview'
+import FilePreview from '@mrhanson/vue-file-preview'
+import '@mrhanson/vue-file-preview/release/file-preview.css'
 Vue.use(FilePreview)
+```
+
+- Vue component
+
+```html
+<script>
+  import FilePreview from '@mrhanson/vue-file-preview'
+  import '@mrhanson/vue-file-preview/release/file-preview.css'
+  export default {
+    components: {
+      FilePreview
+    }
+  }
+</script>
 ```

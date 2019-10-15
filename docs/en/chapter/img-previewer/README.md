@@ -7,7 +7,7 @@
 ## Basic Usage
 
 <!-- prettier-ignore -->
-```vue
+```html
 <!-- component.vue -->
 <template>
   <img-previewer ref="imgPV" v-bind="imgPvProps">

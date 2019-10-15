@@ -7,15 +7,7 @@
 
 ## 支持文件类型
 
-- 目前支持
-
-  - [markdown](/chapter/md-previewer/)
-  - [img](/chapter/img-previewer/)
-
-- 未来支持
-
-  - excel
-  - docx
+<feat-box />
 
 ## 安装
 
@@ -37,20 +29,17 @@
 ```js
 // Vue app entry file
 import Vue from 'vue'
-import FilePreview from 'vue-file-preview'
-import 'vue-file-preview/dist/lib/file-preview.css'
+import FilePreview from '@mrhanson/vue-file-preview'
+import '@mrhanson/vue-file-preview/release/file-preview.css'
 Vue.use(FilePreview)
 ```
 
 - 局部注册
 
 ```html
-<template>
-  <file-preview />
-</template>
-
 <script>
   import FilePreview from '@mrhanson/vue-file-preview'
+  import '@mrhanson/vue-file-preview/release/file-preview.css'
   export default {
     components: {
       FilePreview

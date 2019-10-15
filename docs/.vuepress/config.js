@@ -1,8 +1,19 @@
+const path = require('path')
 const version = process.env.VERSION || require('../../package.json').version
 
 module.exports = {
   base: '/vue-file-preview/',
   description: 'vue-file-preview docs',
+  head: [
+    [
+      'link',
+      {
+        rel: 'shortcut icon',
+        type: 'image/x-icon',
+        href: '/favicon.ico'
+      }
+    ]
+  ],
   markdown: {
     lineNumbers: true
   },
@@ -28,9 +39,27 @@ module.exports = {
           {
             text: '组件详情',
             items: [
-              { text: 'md-previewer', link: '/chapter/md-previewer/' },
-              { text: 'img-previewer', link: '/chapter/img-previewer/' }
+              { text: 'img-previewer', link: '/chapter/img-previewer/' },
+              { text: 'md-previewer', link: '/chapter/md-previewer/' }
             ]
+          },
+          {
+            text: 'demo',
+            items: [
+              {
+                text: 'img-previewer',
+                items: [
+                  { text: '简单使用', link: '/demo/img/simple' },
+                  { text: '全屏预览', link: '/demo/img/full' },
+                  { text: '搭配jsx', link: '/demo/img/jsx' }
+                ]
+              }
+            ]
+          },
+          {
+            text: 'CHANGELOG',
+            link:
+              'https://github.com/MrHanson/vue-file-preview/blob/release/CHANGELOG.md'
           },
           {
             text: 'Github',
@@ -38,6 +67,17 @@ module.exports = {
           }
         ],
         sidebar: {
+          '/demo/': [
+            {
+              title: 'img-previewer',
+              collapsable: false,
+              children: [
+                ['/demo/img/simple.md', '简单使用'],
+                ['/demo/img/full.md', '全屏预览'],
+                ['/demo/img/jsx.md', '搭配jsx']
+              ]
+            }
+          ],
           '/': [
             ['/', '基本使用'],
             {
@@ -68,6 +108,24 @@ module.exports = {
             ]
           },
           {
+            text: 'demo',
+            items: [
+              {
+                text: 'img-previewer',
+                items: [
+                  { text: 'Simple', link: '/demo/img/simple' },
+                  { text: 'Full screen', link: '/demo/img/full' },
+                  { text: 'with JSX', link: '/demo/img/jsx' }
+                ]
+              }
+            ]
+          },
+          {
+            text: 'CHANGELOG',
+            link:
+              'https://github.com/MrHanson/vue-file-preview/blob/release/CHANGELOG.md'
+          },
+          {
             text: 'Github',
             link: 'https://github.com/MrHanson/vue-file-preview'
           }
@@ -89,5 +147,12 @@ module.exports = {
         }
       }
     }
-  }
+  },
+  configureWebpack: () => ({
+    resolve: {
+      alias: {
+        '@': path.join(__dirname, '../../src')
+      }
+    }
+  })
 }
