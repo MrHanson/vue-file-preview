@@ -70,16 +70,11 @@ describe('only preview mode', () => {
   })
 })
 
-describe('error slot', () => {
-  it('default', () => {
-    const wrapper = mount(imgPreviewer)
-    expect(wrapper.find('#image_error').exists())
-  })
-
-  it('custom', () => {
+describe('custom layout', () => {
+  it('default slot', () => {
     const wrapper = mount(imgPreviewer, {
       slots: {
-        error: '<span style="color: red">error slot</span>'
+        default: '<div>default slot</div>'
       }
     })
     expect(wrapper.html()).toMatchSnapshot()

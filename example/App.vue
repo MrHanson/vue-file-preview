@@ -2,15 +2,20 @@
   <div id="app">
     <file-preview
       ref="filePV"
-      :file-type="operationProps.fileType"
-      :md-pv-props="operationProps.mdPvProps"
-      :img-pv-props="operationProps.imgPvProps"
+      :file-type="fileType"
+      :md-pv-props="mdPvProps"
+      :img-pv-props="imgPvProps"
     >
-      <template v-slot:img_error>
-        <div class="image-slot">
-          <i class="el-icon-picture-outline"></i>
+      <div class="list">
+        <div
+          class="item"
+          v-for="(src, index) in imgPvProps.coverList"
+          :key="index"
+          @click="openViewer(index)"
+        >
+          <img :src="src" :alt="index" />
         </div>
-      </template>
+      </div>
     </file-preview>
   </div>
 </template>
@@ -19,43 +24,39 @@
 export default {
   data() {
     return {
-      operationProps: {
-        fileType: 'img',
-        mdPvProps: {
-          readOnly: true,
-          height: '500px',
-          mode: 'markdown',
-          previewStyle: 'vertical'
-        },
-        imgPvProps: {
-          coverList: [
-            'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
-            () => (
-              <img src="https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg" />
-            )
-          ],
-          width: '250px',
-          height: '200px',
-          alt: '加载失败',
-          previewSrcList: [
-            'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
-            'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg'
-          ],
-          viewerOptions: {}
-        }
+      fileType: 'img',
+      mdPvProps: {
+        readOnly: true,
+        height: '500px',
+        mode: 'markdown',
+        previewStyle: 'vertical'
       },
-      constant: {
-        fileTypeList: [
-          {
-            label: 'markdown',
-            value: 'md'
-          },
-          {
-            label: 'img',
-            value: 'img'
-          }
-        ]
+      imgPvProps: {
+        coverList: [
+          'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
+          'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg',
+          'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
+          'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg',
+          'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
+          'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg'
+        ],
+        width: '250px',
+        height: '200px',
+        previewSrcList: [
+          'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
+          'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg',
+          'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
+          'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg',
+          'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
+          'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg'
+        ],
+        viewerOptions: {}
       }
+    }
+  },
+  methods: {
+    openViewer(index) {
+      this.$refs['filePV'].openImgViewer(index)
     }
   }
 }
@@ -73,7 +74,26 @@ body {
   height: 100%;
 }
 #app {
-  padding: 16px;
+  padding: 8px;
   height: 100%;
+}
+</style>
+
+<style lang="less">
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  background-color: #c0c4cc;
+  .item {
+    box-sizing: border-box;
+    width: 50%;
+    padding: 0.1rem;
+    img {
+      border-radius: 16px;
+      width: 100%;
+      height: 100%;
+    }
+  }
 }
 </style>

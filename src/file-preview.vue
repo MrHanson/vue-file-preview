@@ -21,7 +21,7 @@ export default {
           <img-previewer
             {...{ attrs: this.imgPvProps }}
             scopedSlots={{
-              error: () => this.$slots.img_error
+              default: () => this.$slots.default
             }}
             ref="imgPV"
           ></img-previewer>
@@ -59,6 +59,9 @@ export default {
         case 'md':
           break
       }
+    },
+    openImgViewer(index = 0) {
+      this.$refs['imgPV'].openViewer(index)
     },
     _handleMdPvTextChange(val) {
       this.$emit('md-text-change', val)

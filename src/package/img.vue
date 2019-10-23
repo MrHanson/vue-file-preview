@@ -1,49 +1,38 @@
 <template>
   <div id="img-previewer">
-    <template v-if="cList.length > 0">
-      <div class="cover-container">
-        <ul>
-          <li v-for="(item, index) in cList" :key="item.key || index">
-            <v-node v-if="isFunction(item)" :node="item()"></v-node>
-            <v-node v-else-if="item.render" :node="item.render()"></v-node>
-            <img
-              v-else-if="isObject(item)"
-              :style="item.style"
-              :src="item.src"
-              :width="item.width"
-              :height="item.height"
-              :alt="item.alt"
-              @click="openViewer(index)"
-            />
-            <div v-else :style="{ width, height }">
-              <i
-                :style="{ 'line-height': height, 'font-size': iconFontSize }"
-                class="iconfont"
-              >
-                &#xe609;
-              </i>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </template>
-    <template v-else-if="previewSrcList.length == 0">
-      <div class="image_error">
-        <slot name="error">加载失败</slot>
-      </div>
-    </template>
+    <slot>
+      <template v-if="cList.length > 0">
+        <div class="cover-container">
+          <ul>
+            <li v-for="(item, index) in cList" :key="item.key || index">
+              <v-node v-if="isFunction(item)" :node="item()"></v-node>
+              <v-node v-else-if="item.render" :node="item.render()"></v-node>
+              <img
+                v-else-if="isObject(item)"
+                :style="item.style"
+                :src="item.src"
+                :width="item.width"
+                :height="item.height"
+                :alt="item.alt"
+                @click="openViewer(index)"
+              />
+              <div v-else :style="{ width, height }">
+                <i
+                  :style="{ 'line-height': height, 'font-size': iconFontSize }"
+                  class="iconfont"
+                >
+                  &#xe609;
+                </i>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </template>
+    </slot>
     <div ref="container" id="container" style="display: none">
       <ul>
         <li v-for="(item, index) in previewSrcList" :key="index">
           <img v-if="isHttpUrl(item)" :src="item" />
-          <div v-else :style="{ width, height }">
-            <i
-              :style="{ 'line-height': height, 'font-size': iconFontSize }"
-              class="iconfont"
-            >
-              &#xe609;
-            </i>
-          </div>
         </li>
       </ul>
     </div>
@@ -176,17 +165,6 @@ function arrayPropsConvert(list, gw, gh) {
   overflow: auto;
   .cover {
     cursor: pointer;
-  }
-  .image_error {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 14px;
-    background: #f5f7fa;
-    color: #c0c4cc;
-    vertical-align: middle;
   }
   ul {
     margin: 0;

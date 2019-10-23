@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1570517686578" clover="3.2.0">
-  <project timestamp="1570517686578" name="All files">
-    <metrics statements="105" coveredstatements="55" conditionals="62" coveredconditionals="15" methods="23" coveredmethods="19" elements="190" coveredelements="89" complexity="0" loc="105" ncloc="105" packages="4" files="6" classes="6">
+<coverage generated="1571823775265" clover="3.2.0">
+  <project timestamp="1571823775265" name="All files">
+    <metrics statements="105" coveredstatements="54" conditionals="63" coveredconditionals="15" methods="22" coveredmethods="18" elements="190" coveredelements="87" complexity="0" loc="105" ncloc="105" packages="4" files="6" classes="6">
       <package name="src">
-        <metrics statements="11" coveredstatements="7" conditionals="3" coveredconditionals="1" methods="3" coveredmethods="3"/>
+        <metrics statements="12" coveredstatements="7" conditionals="4" coveredconditionals="1" methods="3" coveredmethods="3"/>
         <file name="file-preview.vue" path="E:\WebS\vue-file-preview\src\file-preview.vue">
-          <metrics statements="11" coveredstatements="7" conditionals="3" coveredconditionals="1" methods="3" coveredmethods="3"/>
+          <metrics statements="12" coveredstatements="7" conditionals="4" coveredconditionals="1" methods="3" coveredmethods="3"/>
           <line num="2" count="1" type="stmt"/>
           <line num="3" count="1" type="stmt"/>
           <line num="4" count="1" type="stmt"/>
@@ -17,6 +17,7 @@
           <line num="58" count="0" type="stmt"/>
           <line num="60" count="0" type="stmt"/>
           <line num="64" count="0" type="stmt"/>
+          <line num="67" count="0" type="stmt"/>
         </file>
       </package>
       <package name="src.components">
@@ -30,53 +31,53 @@
         <metrics statements="52" coveredstatements="28" conditionals="27" coveredconditionals="6" methods="6" coveredmethods="5"/>
         <file name="img.vue" path="E:\WebS\vue-file-preview\src\package\img.vue">
           <metrics statements="47" coveredstatements="26" conditionals="27" coveredconditionals="6" methods="5" coveredmethods="5"/>
-          <line num="59" count="2" type="stmt"/>
-          <line num="60" count="2" type="stmt"/>
-          <line num="61" count="2" type="stmt"/>
-          <line num="62" count="2" type="stmt"/>
-          <line num="63" count="2" type="stmt"/>
-          <line num="68" count="7" type="stmt"/>
-          <line num="69" count="3" type="stmt"/>
-          <line num="75" count="7" type="stmt"/>
-          <line num="80" count="7" type="stmt"/>
-          <line num="83" count="0" type="stmt"/>
-          <line num="84" count="0" type="stmt"/>
-          <line num="86" count="0" type="stmt"/>
-          <line num="90" count="7" type="stmt"/>
-          <line num="95" count="7" type="stmt"/>
-          <line num="96" count="7" type="stmt"/>
-          <line num="97" count="7" type="stmt"/>
-          <line num="98" count="7" type="stmt"/>
-          <line num="102" count="7" type="cond" truecount="1" falsecount="1"/>
-          <line num="103" count="7" type="stmt"/>
-          <line num="112" count="7" type="stmt"/>
-          <line num="113" count="7" type="cond" truecount="4" falsecount="0"/>
-          <line num="114" count="4" type="stmt"/>
-          <line num="116" count="3" type="stmt"/>
-          <line num="120" count="7" type="stmt"/>
-          <line num="121" count="7" type="stmt"/>
-          <line num="135" count="7" type="stmt"/>
-          <line num="137" count="7" type="stmt"/>
-          <line num="138" count="7" type="stmt"/>
-          <line num="139" count="0" type="stmt"/>
-          <line num="140" count="0" type="stmt"/>
+          <line num="48" count="2" type="stmt"/>
+          <line num="49" count="2" type="stmt"/>
+          <line num="50" count="2" type="stmt"/>
+          <line num="51" count="2" type="stmt"/>
+          <line num="52" count="2" type="stmt"/>
+          <line num="57" count="6" type="stmt"/>
+          <line num="58" count="2" type="stmt"/>
+          <line num="64" count="6" type="stmt"/>
+          <line num="69" count="6" type="stmt"/>
+          <line num="72" count="0" type="stmt"/>
+          <line num="73" count="0" type="stmt"/>
+          <line num="75" count="0" type="stmt"/>
+          <line num="79" count="6" type="stmt"/>
+          <line num="84" count="6" type="stmt"/>
+          <line num="85" count="6" type="stmt"/>
+          <line num="86" count="6" type="stmt"/>
+          <line num="87" count="6" type="stmt"/>
+          <line num="91" count="6" type="cond" truecount="1" falsecount="1"/>
+          <line num="92" count="6" type="stmt"/>
+          <line num="101" count="6" type="stmt"/>
+          <line num="102" count="6" type="cond" truecount="4" falsecount="0"/>
+          <line num="103" count="4" type="stmt"/>
+          <line num="105" count="2" type="stmt"/>
+          <line num="109" count="6" type="stmt"/>
+          <line num="110" count="6" type="stmt"/>
+          <line num="124" count="6" type="stmt"/>
+          <line num="126" count="6" type="stmt"/>
+          <line num="127" count="6" type="stmt"/>
+          <line num="128" count="0" type="stmt"/>
+          <line num="129" count="0" type="stmt"/>
+          <line num="135" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="136" count="0" type="stmt"/>
+          <line num="137" count="0" type="stmt"/>
+          <line num="138" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="140" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="141" count="0" type="stmt"/>
+          <line num="142" count="0" type="stmt"/>
+          <line num="145" count="0" type="cond" truecount="0" falsecount="2"/>
           <line num="146" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="147" count="0" type="stmt"/>
-          <line num="148" count="0" type="stmt"/>
+          <line num="147" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="148" count="0" type="cond" truecount="0" falsecount="2"/>
           <line num="149" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="151" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="152" count="0" type="stmt"/>
-          <line num="153" count="0" type="stmt"/>
-          <line num="156" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="157" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="158" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="159" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="160" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="161" count="0" type="stmt"/>
-          <line num="164" count="0" type="cond" truecount="0" falsecount="4"/>
-          <line num="165" count="0" type="stmt"/>
-          <line num="167" count="0" type="stmt"/>
-          <line num="170" count="7" type="stmt"/>
+          <line num="150" count="0" type="stmt"/>
+          <line num="153" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="154" count="0" type="stmt"/>
+          <line num="156" count="0" type="stmt"/>
+          <line num="159" count="6" type="stmt"/>
         </file>
         <file name="md.vue" path="E:\WebS\vue-file-preview\src\package\md.vue">
           <metrics statements="5" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
@@ -88,9 +89,9 @@
         </file>
       </package>
       <package name="src.utils">
-        <metrics statements="41" coveredstatements="20" conditionals="32" coveredconditionals="8" methods="14" coveredmethods="11"/>
+        <metrics statements="40" coveredstatements="19" conditionals="32" coveredconditionals="8" methods="13" coveredmethods="10"/>
         <file name="type.js" path="E:\WebS\vue-file-preview\src\utils\type.js">
-          <metrics statements="12" coveredstatements="10" conditionals="13" coveredconditionals="6" methods="6" coveredmethods="6"/>
+          <metrics statements="11" coveredstatements="9" conditionals="13" coveredconditionals="6" methods="5" coveredmethods="5"/>
           <line num="2" count="1" type="stmt"/>
           <line num="6" count="2" type="stmt"/>
           <line num="7" count="2" type="cond" truecount="3" falsecount="0"/>
@@ -99,10 +100,9 @@
           <line num="16" count="1" type="stmt"/>
           <line num="17" count="1" type="stmt"/>
           <line num="26" count="1" type="stmt"/>
-          <line num="30" count="1" type="stmt"/>
-          <line num="34" count="1" type="cond" truecount="1" falsecount="1"/>
-          <line num="35" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="37" count="1" type="stmt"/>
+          <line num="30" count="1" type="cond" truecount="1" falsecount="1"/>
+          <line num="31" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="33" count="1" type="stmt"/>
         </file>
         <file name="util.js" path="E:\WebS\vue-file-preview\src\utils\util.js">
           <metrics statements="29" coveredstatements="10" conditionals="19" coveredconditionals="2" methods="8" coveredmethods="5"/>
