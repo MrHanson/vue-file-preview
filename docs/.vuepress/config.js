@@ -51,7 +51,8 @@ module.exports = {
                 items: [
                   { text: '简单使用', link: '/demo/img/simple' },
                   { text: '全屏预览', link: '/demo/img/full' },
-                  { text: '搭配jsx', link: '/demo/img/jsx' }
+                  { text: '搭配jsx', link: '/demo/img/jsx' },
+                  { text: '自定义布局', link: '/demo/img/layout' }
                 ]
               }
             ]
@@ -74,7 +75,8 @@ module.exports = {
               children: [
                 ['/demo/img/simple.md', '简单使用'],
                 ['/demo/img/full.md', '全屏预览'],
-                ['/demo/img/jsx.md', '搭配jsx']
+                ['/demo/img/jsx.md', '搭配jsx'],
+                ['/demo/img/layout', '自定义布局']
               ]
             }
           ],
@@ -115,7 +117,8 @@ module.exports = {
                 items: [
                   { text: 'Simple', link: '/demo/img/simple' },
                   { text: 'Full screen', link: '/demo/img/full' },
-                  { text: 'with JSX', link: '/demo/img/jsx' }
+                  { text: 'with JSX', link: '/demo/img/jsx' },
+                  { text: 'custom layout', link: '/demo/img/layout' }
                 ]
               }
             ]

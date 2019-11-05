@@ -64,6 +64,6 @@ export default {
 
 ## Slots
 
-| Name  | Description     |
-| ----- | --------------- |
-| error | show when error |
+| Name    | Description                                                 |
+| ------- | ----------------------------------------------------------- |
+| default | DIY layout，notice that prop coverList disabled when use it |
