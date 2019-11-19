@@ -38,10 +38,7 @@ module.exports = {
           { text: '基本使用', link: '/' },
           {
             text: '组件详情',
-            items: [
-              { text: 'img-previewer', link: '/chapter/img-previewer/' },
-              { text: 'md-previewer', link: '/chapter/md-previewer/' }
-            ]
+            items: [{ text: 'img-previewer', link: '/chapter/img-previewer/' }]
           },
           {
             text: 'demo',
@@ -88,7 +85,6 @@ module.exports = {
               children: [
                 ['/chapter/file-preview/Props.md', 'Props一览'],
                 ['/chapter/file-preview/Events.md', 'Events'],
-                ['/chapter/md-previewer/', 'md-previewer'],
                 ['/chapter/img-previewer/', 'img-previewer']
               ]
             }
@@ -105,7 +101,6 @@ module.exports = {
           {
             text: 'Component Detail',
             items: [
-              { text: 'md-previewer', link: '/en/chapter/md-previewer/' },
               { text: 'img-previewer', link: '/en/chapter/img-previewer/' }
             ]
           },
@@ -142,7 +137,6 @@ module.exports = {
               children: [
                 ['/en/chapter/file-preview/Props.md', 'Props'],
                 ['/en/chapter/file-preview/Events.md', 'Events'],
-                ['/en/chapter/md-previewer/', 'md-previewer'],
                 ['/en/chapter/img-previewer/', 'img-previewer']
               ]
             }
