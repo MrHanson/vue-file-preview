@@ -1,13 +1,22 @@
 <template>
-  <file-preview ref="filePV" :file-type="fileType" :img-pv-props="imgPvProps">
-  </file-preview>
+  <div>
+    <input type="file" @input="handleFileInput" />
+    <file-preview
+      ref="filePV"
+      :file-type="fileType"
+      :img-pv-props="imgPvProps"
+      :excel-pv-props="excelPvProps"
+      :word-pv-props="wordPvProps"
+    >
+    </file-preview>
+  </div>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      fileType: 'img',
+      fileType: 'excel',
       imgPvProps: {
         coverList: [
           'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
@@ -29,12 +38,19 @@ export default {
         ],
         viewerOptions: {}
       },
-      excelPvProps: {}
+      excelPvProps: {
+        excelList: null
+      },
+      wordPvProps: {}
     }
   },
   methods: {
     openViewer(index) {
       this.$refs['filePV'].openImgViewer(index)
+    },
+    handleFileInput(e) {
+      const fileList = e.target.files
+      this.excelPvProps.excelList = Array.from(fileList)
     }
   }
 }
