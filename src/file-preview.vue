@@ -1,21 +1,30 @@
 <script>
 import ImgPreviewer from '@/package/img.vue'
+import ExcelPreviewer from '@/package/excel'
+import WordPvProps from '@/package/word'
 import './style.css'
 
 export default {
   name: 'FilePreview',
   // eslint-disable-next-line
-  render: function(h) {
+  render: () => {
     switch (this.fileType) {
       case 'img':
         return (
-          <img-previewer
+          <ImgPreviewer
+            ref='imgPV'
             {...{ attrs: this.imgPvProps }}
             scopedSlots={{
               default: () => this.$slots.default
             }}
-            ref='imgPV'></img-previewer>
+          />
         )
+      case 'excel':
+        return (
+          <ExcelPreviewer ref='excelPV' {...{ attrs: this.excelPvProps }} />
+        )
+      case 'word':
+        return <WordPvProps ref='wordPV' {...{ attrs: this.wordPvProps }} />
     }
   },
   props: {
@@ -23,22 +32,23 @@ export default {
       type: String,
       required: true
     },
-    /** img-previewer props */
+    // img-previewer props
     imgPvProps: {
       type: Object,
-      default: null
+      default: () => ({})
+    },
+    // img-previewer props
+    excelPvProps: {
+      type: Object,
+      default: () => ({})
+    },
+    // word-previewer props
+    wordPvProps: {
+      type: Object,
+      default: () => ({})
     }
   },
-  components: {
-    'img-previewer': ImgPreviewer
-  },
   methods: {
-    fileClear() {
-      switch (this.fileType) {
-        case 'md':
-          break
-      }
-    },
     openImgViewer(index = 0) {
       this.$refs['imgPV'].openViewer(index)
     }

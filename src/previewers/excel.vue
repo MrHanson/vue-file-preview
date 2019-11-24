@@ -24,16 +24,8 @@ export default {
   name: 'ExcelPreviewer',
   props: {
     file: {
-      type: File,
+      type: Object,
       default: null
-    },
-    readOnly: {
-      type: Boolean,
-      default: true
-    },
-    contentHeight: {
-      type: String,
-      default: '400px'
     }
   },
   data() {
@@ -46,7 +38,7 @@ export default {
   },
   computed: {
     indexArr() {
-      return ['all', ...getAlphaArr()]
+      return ['all'].concat(getAlphaArr())
     }
   },
   watch: {

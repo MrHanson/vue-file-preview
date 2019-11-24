@@ -46,8 +46,11 @@
 <script>
 /* Viewer.js */
 import ImgViewer from 'viewerjs'
-import VNode from '@/components/v-node.js'
 import 'viewerjs/dist/viewer.css'
+
+import VNode from '@/components/v-node.js'
+
+/* util */
 import { isFunction, isObject, isString } from '@/utils/type'
 import { isHttpUrl } from '@/utils/util'
 
@@ -116,9 +119,9 @@ export default {
 }
 
 /**
- * @param srcList{Array}
- * @param gw{String} global width
- * @param gh{String} global height
+ * @param {Array}srcList
+ * @param {string}gw global width
+ * @param {string}gh global height
  */
 function arrayPropsConvert(list, gw, gh) {
   let ori = [...list]
