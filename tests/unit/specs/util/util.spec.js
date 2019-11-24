@@ -1,5 +1,5 @@
 // prettier-ignore
-import { isHttpUrl, Obj2Arr, str2Arr, getAlphaArr } from '@/utils/util'
+import { isHttpUrl, Obj2Arr, str2Arr, getAlphaArr } from '@/mixin/util'
 
 describe('convert', () => {
   it('isHttpUrl', () => {

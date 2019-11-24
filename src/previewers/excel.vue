@@ -11,22 +11,31 @@
         {{ name }}
       </span>
     </div>
-    <div class="tbl-wrap"></div>
+    <div class="tbl-wrap">
+      <VTable />
+    </div>
   </div>
 </template>
 
 <script>
 // prettier-ignore
-import { file2Uint8Arr, Obj2Arr, getAlphaArr, getAlphaIndex } from '@/utils/util'
+import { file2Uint8Arr, Obj2Arr, getAlphaArr, getAlphaIndex } from '@/mixin/util'
 import XLSX from 'xlsx'
+
+/* components */
+import 'vue-easytable/libs/themes-base/index.css'
+import { VTable } from 'vue-easytable'
 
 export default {
   name: 'ExcelPreviewer',
   props: {
-    file: {
-      type: Object,
-      default: null
+    excelList: {
+      type: Array,
+      default: () => []
     }
+  },
+  components: {
+    VTable
   },
   data() {
     return {
@@ -42,9 +51,8 @@ export default {
     }
   },
   watch: {
-    file(val) {
-      this.sheetData = []
-      this.sheetName = []
+    excelList(val) {
+      this.resetData()
       if (val) {
         file2Uint8Arr(val, data => {
           const workbook = XLSX.read(data, { type: 'array' })
@@ -62,6 +70,12 @@ export default {
       this.selectedTab = sheetIndex
       this.tblData = this.sheetData[sheetIndex]
       console.log(this.tblData)
+    },
+    resetData() {
+      this.sheetName = []
+      this.sheetData = []
+      this.selectedTab = ''
+      this.tblData = []
     },
     _formateSheets(sheets) {
       if (!Array.isArray(sheets)) {

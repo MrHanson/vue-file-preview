@@ -51,8 +51,8 @@ import 'viewerjs/dist/viewer.css'
 import VNode from '@/components/v-node.js'
 
 /* util */
-import { isFunction, isObject, isString } from '@/utils/type'
-import { isHttpUrl } from '@/utils/util'
+import { isFunction, isObject, isString } from '@/mixin/type'
+import { isHttpUrl } from '@/mixin/util'
 
 export default {
   name: 'ImgPreviewer',

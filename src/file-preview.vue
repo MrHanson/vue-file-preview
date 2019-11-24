@@ -1,13 +1,13 @@
 <script>
-import ImgPreviewer from '@/package/img.vue'
-import ExcelPreviewer from '@/package/excel'
-import WordPvProps from '@/package/word'
+import ImgPreviewer from '@/previewers/img.vue'
+import ExcelPreviewer from '@/previewers/excel'
+import WordPvProps from '@/previewers/word'
 import './style.css'
 
 export default {
   name: 'FilePreview',
   // eslint-disable-next-line
-  render: () => {
+  render(h) {
     switch (this.fileType) {
       case 'img':
         return (

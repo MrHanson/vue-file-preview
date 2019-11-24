@@ -1,5 +1,5 @@
 // prettier-ignore
-import {isString, isObject, isFunction, isEqual } from '@/utils/type'
+import {isString, isObject, isFunction, isEqual } from '@/mixin/type'
 
 describe('type vertification', () => {
   it('isString', () => {

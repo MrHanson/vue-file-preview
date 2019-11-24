@@ -23,7 +23,7 @@ export function file2Uint8Arr(f, cb) {
     }
     reader.readAsArrayBuffer(f)
   } else {
-    console.error('expected get File')
+    console.error(`[file-preview] expected File but get ${typeof f}`)
   }
 }
 
@@ -91,4 +91,14 @@ export function getAlphaIndex(alpha, start = 0) {
   }
 
   return res + getAlphaIndex(alpha.slice(start + 1))
+}
+
+/**
+ * @description get local file stream
+ * @param {object}
+ * @return {string} A DOMString containing an object URL that can be used to reference the contents of the specified source object.
+ */
+export function localFileStream(file) {
+  console.log(file)
+  return ''
 }
