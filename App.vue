@@ -1,15 +1,5 @@
 <template>
   <file-preview ref="filePV" :file-type="fileType" :img-pv-props="imgPvProps">
-    <div class="list">
-      <div
-        class="item"
-        v-for="(src, index) in imgPvProps.coverList"
-        :key="index"
-        @click="openViewer(index)"
-      >
-        <img :src="src" :alt="index" />
-      </div>
-    </div>
   </file-preview>
 </template>
 
@@ -39,7 +29,7 @@ export default {
         ],
         viewerOptions: {}
       },
-      src: ''
+      excelPvProps: {}
     }
   },
   methods: {
