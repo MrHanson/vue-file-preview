@@ -3,17 +3,15 @@
     <div class="sheet-tab-wrap">
       <span
         class="sheet-tab"
-        :class="selectedTab === sheetName ? 'selected' : ''"
-        v-for="(name, index) in sheetName"
+        :class="selectedTab === sheetNames ? 'selected' : ''"
+        v-for="(name, index) in sheetNames"
         :key="index"
         @click="handleTblChange(index)"
       >
         {{ name }}
       </span>
     </div>
-    <div class="tbl-wrap">
-      <VTable />
-    </div>
+    <div class="tbl-wrap"></div>
   </div>
 </template>
 
@@ -24,7 +22,6 @@ import XLSX from 'xlsx'
 
 /* components */
 import 'vue-easytable/libs/themes-base/index.css'
-import { VTable } from 'vue-easytable'
 
 export default {
   name: 'ExcelPreviewer',
@@ -34,77 +31,72 @@ export default {
       default: () => []
     }
   },
-  components: {
-    VTable
-  },
   data() {
     return {
-      sheetName: [],
-      sheetData: [],
+      sheetNames: [],
+      sheetDatas: [],
       selectedTab: '',
       tblData: []
     }
   },
-  computed: {
-    indexArr() {
-      return ['all'].concat(getAlphaArr())
-    }
-  },
   watch: {
-    excelList(val) {
+    async excelList(curList) {
       this.resetData()
-      if (val) {
-        file2Uint8Arr(val, data => {
-          const workbook = XLSX.read(data, { type: 'array' })
-          console.log('origin', workbook.Sheets)
-          this.sheetData = this._formateSheets(Obj2Arr(workbook.Sheets))
-          this.selectedTab = this.sheetName[0]
-          this.tblData = this.sheetData[0]
-          console.log('formatted', this.sheetData)
-        })
+      // prettier-ignore
+      const promiseArr = curList.map(f => file2Uint8Arr(f))
+      if (promiseArr.length <= 0) {
+        return
       }
+      const collections = Promise.all(promiseArr)
+      console.log(collections)
+      const dataList = await collections
+      dataList.forEach(data => {
+        const workbook = XLSX.read(data, { type: 'array' })
+        const sheets = Obj2Arr(workbook.Sheets)
+
+        this.sheetNames = this.sheetNames.concat(
+          sheets.map(sheet => sheet.name)
+        )
+        this.sheetDatas = this.sheetDatas.concat(
+          this._formateSheets(sheets.map(sheet => sheet.content))
+        )
+      })
+
+      this.selectedTab = this.sheetNames[0][0]
+      this.tblData = this.sheetDatas[0][0]
     }
   },
   methods: {
     handleTblChange(sheetIndex) {
       this.selectedTab = sheetIndex
-      this.tblData = this.sheetData[sheetIndex]
+      this.tblData = this.sheetDatas[sheetIndex]
       console.log(this.tblData)
     },
     resetData() {
-      this.sheetName = []
-      this.sheetData = []
+      this.sheetNames = []
+      this.sheetDatas = []
       this.selectedTab = ''
       this.tblData = []
     },
-    _formateSheets(sheets) {
-      if (!Array.isArray(sheets)) {
+    _formateSheets(contents) {
+      if (!Array.isArray(contents)) {
         return []
       }
-      return sheets.map(sheet => {
-        /* set sheet tab name */
-        this.sheetName.push(sheet.name)
+      console.log(contents)
+      return contents.map(content => {
+        const columns = ['all']
+        const data = []
 
-        /* set sheet content */
-        const oriContent = sheet.content
-        // prettier-ignore
-        const res = { name: sheet.name, content: { tblData: {}, minRowLen: 10, minColLen: 26 } }
-        const resContent = res.content
-        const tblData = res.content.tblData
+        Object.keys(content).forEach(key => {
+          if (key === '!ref') {
+            const range = content[key].match(/[\w]:[\w]/g)
+            const start = getAlphaIndex(range[0])
+            const end = getAlphaIndex(range[1])
 
-        if (oriContent['!ref']) {
-          const end = oriContent['!ref'].split(':')[1]
-          console.log(end)
-          resContent.minRowLen = parseInt(end.match(/\d+/g).pop())
-          resContent.minColLen = getAlphaIndex(end.match(/[A-Z]+/g).pop())
-        }
-
-        for (let key in oriContent) {
-          if (key.indexOf('!') === -1) {
-            tblData[key] = oriContent[key]
+            getAlphaArr(start, end)
           }
-        }
-        return res
+        })
+        return { columns, data }
       })
     }
   }

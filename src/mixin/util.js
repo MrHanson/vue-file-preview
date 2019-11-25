@@ -13,18 +13,52 @@ export function isHttpUrl(str) {
  * @param {Function} cb
  * @return {Uint8Array}
  */
-export function file2Uint8Arr(f, cb) {
-  if (f instanceof File) {
-    const reader = new FileReader()
-    reader.onload = function(e) {
-      if (cb) {
-        cb(new Uint8Array(e.target.result))
+export function file2Uint8Arr(f) {
+  return new Promise((resolve, reject) => {
+    if (f instanceof File) {
+      const reader = new FileReader()
+      reader.onload = function(e) {
+        resolve(new Uint8Array(e.target.result))
       }
+      reader.readAsArrayBuffer(f)
+    } else {
+      reject(
+        `[file-preview] expected File but get ${toString.call(
+          Object.getPrototypeOf(f)
+        )}`
+      )
     }
-    reader.readAsArrayBuffer(f)
-  } else {
-    console.error(`[file-preview] expected File but get ${typeof f}`)
+  })
+}
+
+/**
+ * @description copy from lodash
+ * @param {*} value
+ * @return {boolean}
+ */
+export function isPlainObject(value) {
+  function isObjectLike(value) {
+    return typeof value === 'object' && value !== null
   }
+
+  function getTag(value) {
+    if (value == null) {
+      return value === undefined ? '[object Undefined]' : '[object Null]'
+    }
+    return toString.call(value)
+  }
+
+  if (!isObjectLike(value) || getTag(value) != '[object Object]') {
+    return false
+  }
+  if (Object.getPrototypeOf(value) === null) {
+    return true
+  }
+  let proto = value
+  while (Object.getPrototypeOf(proto) !== null) {
+    proto = Object.getPrototypeOf(proto)
+  }
+  return Object.getPrototypeOf(value) === proto
 }
 
 /**
@@ -32,40 +66,28 @@ export function file2Uint8Arr(f, cb) {
  * @return {Array<Object>} { name: 'xxx', content: Object }
  */
 export function Obj2Arr(obj) {
-  if (typeof obj !== 'object') {
+  if (!isPlainObject(obj)) {
     return []
   }
 
   const res = []
   for (const key in obj) {
-    const item = obj[key]
     res.push({
       name: key,
-      content: item
+      content: obj[key]
     })
   }
   return res
 }
 
 /**
- * @param {String} str
- * @return {Array}
- */
-export function str2Arr(str) {
-  if (typeof str !== 'string') {
-    return []
-  }
-
-  return JSON.parse(str)
-}
-
-/**
  * @description generate alpha Array from A to Z by ASCII
  * @return {Array<string>} ['A','B','C'...]
  */
-export function getAlphaArr() {
-  // prettier-ignore
-  return new Array(26).fill().map((_, index) => String.fromCharCode(index + 65))
+export function getAlphaArr(startIndex = 0, endIndex = 25) {
+  return new Array(endIndex - startIndex + 1)
+    .fill()
+    .map((_, index) => String.fromCharCode(index + startIndex + 65))
 }
 
 /**
@@ -91,14 +113,4 @@ export function getAlphaIndex(alpha, start = 0) {
   }
 
   return res + getAlphaIndex(alpha.slice(start + 1))
-}
-
-/**
- * @description get local file stream
- * @param {object}
- * @return {string} A DOMString containing an object URL that can be used to reference the contents of the specified source object.
- */
-export function localFileStream(file) {
-  console.log(file)
-  return ''
 }
