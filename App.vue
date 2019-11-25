@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input type="file" @input="handleFileInput" />
+    <input type="file" multiple @input="handleFileInput" />
     <file-preview
       ref="filePV"
       :file-type="fileType"
