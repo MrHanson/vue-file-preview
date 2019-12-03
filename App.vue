@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <input type="file" multiple @input="handleFileInput" />
+  <div id="app">
+    <!-- <input type="file" multiple @input="handleFileInput" />
     <file-preview
       ref="filePV"
       :file-type="fileType"
@@ -8,11 +8,18 @@
       :excel-pv-props="excelPvProps"
       :word-pv-props="wordPvProps"
     >
-    </file-preview>
+    </file-preview> -->
+    <pv-table
+      :table-columns="tableColumns"
+      :content-data="contentData"
+      height="300"
+    />
   </div>
 </template>
 
 <script>
+import PvTable from '@/components/pv-table'
+
 export default {
   data() {
     return {
@@ -41,9 +48,52 @@ export default {
       excelPvProps: {
         excelList: null
       },
-      wordPvProps: {}
+      wordPvProps: {},
+
+      tableColumns: [
+        {
+          label: 'first',
+          prop: 'first',
+          align: 'center',
+          fixed: true
+        },
+        {
+          label: 'second',
+          prop: 'second',
+          align: 'center'
+        },
+        {
+          label: 'third',
+          prop: 'third',
+          align: 'center'
+        },
+        {
+          label: 'fourth',
+          prop: 'fourth',
+          align: 'center'
+        },
+        {
+          label: 'fifth',
+          prop: 'fifth',
+          align: 'center'
+        }
+      ],
+      contentData: (() =>
+        // eslint-disable-next-line
+        new Array(10).fill().map(_ => ({
+          first: 1,
+          second: 2,
+          third: 3,
+          fourth: 4,
+          fifth: 5
+        })))()
     }
   },
+
+  components: {
+    PvTable
+  },
+
   methods: {
     openViewer(index) {
       this.$refs['filePV'].openImgViewer(index)
@@ -69,7 +119,8 @@ body {
 }
 #app {
   padding: 8px;
-  height: 100%;
+  width: 70%;
+  margin: 0 auto;
 }
 </style>
 
