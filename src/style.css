@@ -5,18 +5,7 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  padding: 16px;
   background: rgba(66, 185, 131, 0.05);
-}
-
-::-webkit-scrollbar-button:decrement {
-  background-color: transparent;
-  opacity: 0;
-}
-
-::-webkit-scrollbar-button:increment {
-  background-color: transparent;
-  opacity: 0;
 }
 
 /* Handle */

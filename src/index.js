@@ -24,7 +24,3 @@ WordPreviewer.install = function(Vue) {
 }
 
 export const previewers = { ImgPreviewer, ExcelPrviewer, WordPreviewer }
-
-// util
-import { localFileStream } from './mixin/util'
-export const util = { localFileStream }

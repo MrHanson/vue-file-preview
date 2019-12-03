@@ -20,9 +20,6 @@
 import { file2Uint8Arr, Obj2Arr, getAlphaArr, getAlphaIndex } from '@/mixin/util'
 import XLSX from 'xlsx'
 
-/* components */
-import 'vue-easytable/libs/themes-base/index.css'
-
 export default {
   name: 'ExcelPreviewer',
   props: {

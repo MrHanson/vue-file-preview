@@ -715,6 +715,11 @@
     cssnano-preset-default "^4.0.0"
     postcss "^7.0.0"
 
+"@laomao800/parse-size-with-unit@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.npm.taobao.org/@laomao800/parse-size-with-unit/download/@laomao800/parse-size-with-unit-1.0.0.tgz#754f8eb50462b56afb3367df6a21502f08676e40"
+  integrity sha1-dU+OtQRitWr7M2ffaiFQLwhnbkA=
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.npm.taobao.org/@mrmlnc/readdir-enhanced/download/@mrmlnc/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
