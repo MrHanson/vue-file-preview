@@ -28,10 +28,6 @@ export default {
       default: () => []
     },
 
-    scrollLeft: {
-      type: Number,
-      default: 0
-    },
     scrollTop: {
       type: Number,
       default: 0
@@ -51,10 +47,7 @@ export default {
       )
     },
 
-    async scrollLeft(val) {
-      await this.$nextTick()
-      this.$refs['tableBody'].$el.scrollLeft = val
-    },
+    // fixed body scroll with normal body
     async scrollTop(val) {
       await this.$nextTick()
       this.$refs['tableBody'].$el.scrollTop = val
@@ -66,6 +59,7 @@ export default {
     return (
       <div class='pv-table__fixed' style={{ maxWidth: this.maxWidth }}>
         <table-header
+          class='fixed'
           enable-fixed={true}
           min-height={this.headerHeight}
           columns={this.columns}

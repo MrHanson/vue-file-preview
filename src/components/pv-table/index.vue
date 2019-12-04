@@ -5,6 +5,7 @@
       :columns="internalTableColumns"
       :gutter-width="gutterWidth"
       :columns-width.sync="columnsWidth"
+      :scroll-left="scrollLeft"
     />
     <table-body
       ref="tableBody"
@@ -22,7 +23,6 @@
       :header-height="headerHeight"
       :columns-width="columnsWidth"
       :scroll-top="scrollTop"
-      :scroll-left="scrollLeft"
     />
   </div>
 </template>
@@ -54,7 +54,7 @@ export default {
     return {
       internalTableColumns: [],
 
-      gutterWidth: '',
+      gutterWidth: 0,
       headerHeight: '',
       columnsWidth: [],
 
@@ -74,7 +74,7 @@ export default {
     this.$nextTick(() => {
       // dynamtic computed gutter width
       const { clientWidth, offsetWidth } = this.$refs['tableBody'].$el
-      this.gutterWidth = parseSize(Math.abs(clientWidth - offsetWidth) - 1)
+      this.gutterWidth = Math.abs(clientWidth - offsetWidth) - 1
 
       const { offsetHeight } = this.$refs['tableHeader'].$el
       // get height of header

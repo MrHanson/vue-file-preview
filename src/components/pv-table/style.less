@@ -40,12 +40,14 @@
 
     th.gutter {
       padding: 0;
+      box-sizing: border-box;
     }
   }
 }
 
 .pv-table__header {
   border-bottom: 1px solid #ddd;
+  overflow: hidden;
 }
 
 .pv-table__body {
@@ -53,10 +55,6 @@
   // for multi border
   margin-top: -1px;
   border-top: none;
-
-  table tr:hover td {
-    background-color: #f5f7fa;
-  }
 
   &.fixed {
     overflow: hidden;

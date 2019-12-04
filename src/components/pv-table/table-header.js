@@ -7,12 +7,25 @@ export default {
       default: () => []
     },
     gutterWidth: {
-      type: String,
-      default: ''
+      type: Number,
+      default: 0
     },
     enableFixed: {
       type: Boolean,
       default: false
+    },
+
+    scrollLeft: {
+      type: Number,
+      default: 0
+    }
+  },
+
+  watch: {
+    // normal header scroll with normal body
+    async scrollLeft(val) {
+      await this.$nextTick()
+      this.$refs['tableHeader'].scrollLeft = val
     }
   },
 
@@ -46,23 +59,24 @@ export default {
       )
     }
     return (
-      <div class='pv-table__header'>
+      <div ref='tableHeader' class='pv-table__header'>
         <table>
           <colgroup>
             {this.columns.map((column, index) => (
               <col key={'colg' + index} width={column.width} />
             ))}
+            {this.gutterWidth > 0 ? (
+              <col class='gutter' width={this.gutterWidth} />
+            ) : (
+              ''
+            )}
           </colgroup>
           <tbody>
             <tr ref='header'>
               {this.columns.map((column, index) => (
                 <th key={'col' + index}>{column.label}</th>
               ))}
-              {this.gutterWidth ? (
-                <th class='gutter' style={{ width: this.gutterWidth }}></th>
-              ) : (
-                ''
-              )}
+              {this.gutterWidth > 0 ? <th class='gutter'></th> : ''}
             </tr>
           </tbody>
         </table>

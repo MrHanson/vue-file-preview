@@ -89,7 +89,7 @@ export default {
       }
 
       if (scrollLeft >= 0) {
-        this.$emit('scorll-lr', scrollLeft)
+        this.$emit('scroll-lr', scrollLeft)
       }
     }
   }
