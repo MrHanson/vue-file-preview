@@ -1,6 +1,6 @@
 <script>
 import ImgPreviewer from '@/previewers/img.vue'
-import ExcelPreviewer from '@/previewers/excel'
+import ExcelPreviewer from '@/previewers/excel/index'
 import WordPvProps from '@/previewers/word'
 import './style.css'
 

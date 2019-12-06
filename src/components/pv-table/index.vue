@@ -35,6 +35,7 @@ import tableFixed from './table-fixed'
 import parseSize from '@laomao800/parse-size-with-unit'
 
 export default {
+  name: 'PvTable',
   props: {
     tableColumns: {
       type: Array,

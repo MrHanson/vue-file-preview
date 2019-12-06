@@ -2,7 +2,8 @@
   "name": "@mrhanson/vue-file-preview",
   "version": "0.1.2",
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "main": "release/file-preview.common.js",
   "style": "release/file-preview.css",

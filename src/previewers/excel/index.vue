@@ -1,21 +1,7 @@
-<template>
-  <div id="excel-previewer">
-    <div class="sheet-tab-wrap">
-      <span
-        class="sheet-tab"
-        :class="selectedTab === sheetNames ? 'selected' : ''"
-        v-for="(name, index) in sheetNames"
-        :key="index"
-        @click="handleTblChange(index)"
-      >
-        {{ name }}
-      </span>
-    </div>
-    <div class="tbl-wrap"></div>
-  </div>
-</template>
-
 <script>
+import PvTabs from '@/components/pv-tabs'
+import PvTable from '@/components/pv-table'
+
 // prettier-ignore
 import { file2Uint8Arr, Obj2Arr, getAlphaArr, getAlphaIndex } from '@/mixin/util'
 import XLSX from 'xlsx'
@@ -33,20 +19,21 @@ export default {
       sheetNames: [],
       sheetDatas: [],
       selectedTab: '',
-      tblData: []
+      tblData: [],
+      isClientStream: true // judge if client file stream or not
     }
   },
   watch: {
     async excelList(curList) {
       this.resetData()
-      // prettier-ignore
-      const promiseArr = curList.map(f => file2Uint8Arr(f))
-      if (promiseArr.length <= 0) {
-        return
-      }
-      const collections = Promise.all(promiseArr)
-      console.log(collections)
-      const dataList = await collections
+
+      const availFileList = this._getAvailFileList(curList)
+      if (availFileList.length === 0) return
+
+      const promiseArr = availFileList.map(f => file2Uint8Arr(f))
+      if (promiseArr.length <= 0) return
+
+      const dataList = await Promise.all(promiseArr)
       dataList.forEach(data => {
         const workbook = XLSX.read(data, { type: 'array' })
         const sheets = Obj2Arr(workbook.Sheets)
@@ -58,6 +45,7 @@ export default {
           this._formateSheets(sheets.map(sheet => sheet.content))
         )
       })
+      console.log(this.sheetNames, this.sheetDatas)
 
       this.selectedTab = this.sheetNames[0][0]
       this.tblData = this.sheetDatas[0][0]
@@ -74,6 +62,16 @@ export default {
       this.sheetDatas = []
       this.selectedTab = ''
       this.tblData = []
+    },
+    _getAvailFileList(fileList = []) {
+      if (!this.isClientStream) return []
+      return Array.prototype.filter.call(
+        fileList,
+        f =>
+          f.type &&
+          (String(f.type).indexOf('excel') > 0 ||
+            String(f.type).indexOf('sheet') > 0)
+      )
     },
     _formateSheets(contents) {
       if (!Array.isArray(contents)) {
@@ -96,31 +94,16 @@ export default {
         return { columns, data }
       })
     }
+  },
+
+  render() {
+    return (
+      <div id='excel-previewer'>
+        <PvTabs>
+          <PvTable />
+        </PvTabs>
+      </div>
+    )
   }
 }
 </script>
-
-<style lang="less" scoped>
-.sheet-tab {
-  border: 1px solid #d6d6d6;
-}
-
-#excel-previewer {
-  box-sizing: border-box;
-  .sheet-tab {
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-    border-bottom: none;
-    padding: 6px 6px 0 6px;
-    line-height: 16px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    &.selected {
-      color: lightpink;
-    }
-    &:hover {
-      background: #d6d6d6;
-    }
-  }
-}
-</style>
