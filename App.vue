@@ -1,29 +1,23 @@
 <template>
   <div id="app">
-    <!-- <input type="file" multiple @input="handleFileInput" />
-    <file-preview
-      ref="filePV"
-      :file-type="fileType"
-      :img-pv-props="imgPvProps"
-      :excel-pv-props="excelPvProps"
-      :word-pv-props="wordPvProps"
-    >
-    </file-preview> -->
-    <pv-table
-      :table-columns="tableColumns"
-      :content-data="contentData"
-      height="300"
-    />
+    <input type="file" multiple @input="handleFileInput" />
+    <div class="wrapper">
+      <file-preview
+        ref="filePV"
+        file-type="excel"
+        :img-pv-props="imgPvProps"
+        :excel-pv-props="excelPvProps"
+        :word-pv-props="wordPvProps"
+      >
+      </file-preview>
+    </div>
   </div>
 </template>
 
 <script>
-import PvTable from '@/components/pv-table'
-
 export default {
   data() {
     return {
-      fileType: 'excel',
       imgPvProps: {
         coverList: [
           'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
@@ -46,52 +40,10 @@ export default {
         viewerOptions: {}
       },
       excelPvProps: {
-        excelList: null
+        excelList: []
       },
-      wordPvProps: {},
-
-      tableColumns: [
-        {
-          label: 'first',
-          prop: 'first',
-          align: 'center',
-          fixed: true
-        },
-        {
-          label: 'second',
-          prop: 'second',
-          align: 'center'
-        },
-        {
-          label: 'third',
-          prop: 'third',
-          align: 'center'
-        },
-        {
-          label: 'fourth',
-          prop: 'fourth',
-          align: 'center'
-        },
-        {
-          label: 'fifth',
-          prop: 'fifth',
-          align: 'center'
-        }
-      ],
-      contentData: (() =>
-        // eslint-disable-next-line
-        new Array(10).fill().map(_ => ({
-          first: 1,
-          second: 2,
-          third: 3,
-          fourth: 4,
-          fifth: 5
-        })))()
+      wordPvProps: {}
     }
-  },
-
-  components: {
-    PvTable
   },
 
   methods: {
@@ -119,8 +71,9 @@ body {
 }
 #app {
   padding: 8px;
-  width: 70%;
-  margin: 0 auto;
+}
+.wrapper {
+  margin: 8px 0;
 }
 </style>
 
