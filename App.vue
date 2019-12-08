@@ -1,81 +1,50 @@
 <template>
   <div id="app">
-    <!-- <input type="file" multiple @input="handleFileInput" />
-    <file-preview
-      ref="filePV"
-      :file-type="fileType"
-      :img-pv-props="imgPvProps"
-      :excel-pv-props="excelPvProps"
-      :word-pv-props="wordPvProps"
-    >
-    </file-preview> -->
-    <pv-table
-      :table-columns="tableColumns"
-      :content-data="contentData"
-      height="300"
-    />
+    <input type="file" @input="handleFileInput" />
+    <div class="wrapper">
+      <file-preview
+        ref="filePV"
+        file-type="excel"
+        :img-pv-props="imgPvProps"
+        :excel-pv-props="excelPvProps"
+        :word-pv-props="wordPvProps"
+      >
+      </file-preview>
+    </div>
   </div>
 </template>
 
 <script>
-import PvTable from '@/components/pv-table'
-
 export default {
   data() {
     return {
-      fileType: 'excel',
-      excelPvProps: {
-        excelList: null
+      imgPvProps: {
+        coverList: [
+          'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
+          'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg',
+          'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
+          'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg',
+          'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
+          'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg'
+        ],
+        width: '250px',
+        height: '200px',
+        previewSrcList: [
+          'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
+          'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg',
+          'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
+          'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg',
+          'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
+          'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg'
+        ],
+        viewerOptions: {}
       },
-      wordPvProps: {},
-
-      tableColumns: [
-        {
-          label: 'first',
-          prop: 'first',
-          align: 'center',
-          fixed: true,
-          width: 100
-        },
-        {
-          label: 'second',
-          prop: 'second',
-          align: 'center',
-          width: 100
-        },
-        {
-          label: 'third',
-          prop: 'third',
-          align: 'center',
-          width: 100
-        },
-        {
-          label: 'fourth',
-          prop: 'fourth',
-          align: 'center',
-          width: 100
-        },
-        {
-          label: 'fifth',
-          prop: 'fifth',
-          align: 'center',
-          width: 100
-        }
-      ],
-      contentData: (() =>
-        // eslint-disable-next-line
-        new Array(10).fill().map(_ => ({
-          first: 1,
-          second: 2,
-          third: 3,
-          fourth: 4,
-          fifth: 5
-        })))()
+      excelPvProps: {
+        file: null,
+        tableHeight: '300'
+      },
+      wordPvProps: {}
     }
-  },
-
-  components: {
-    PvTable
   },
 
   methods: {
@@ -84,7 +53,7 @@ export default {
     },
     handleFileInput(e) {
       const fileList = e.target.files
-      this.excelPvProps.excelList = Array.from(fileList)
+      this.excelPvProps.file = fileList[0]
     }
   }
 }
@@ -103,8 +72,9 @@ body {
 }
 #app {
   padding: 8px;
-  width: 70%;
-  margin: 0 auto;
+}
+.wrapper {
+  margin: 8px 0;
 }
 </style>
 
