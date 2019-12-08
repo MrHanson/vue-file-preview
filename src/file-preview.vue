@@ -1,7 +1,6 @@
 <script>
 import ImgPreviewer from '@/previewers/img.vue'
 import ExcelPreviewer from '@/previewers/excel'
-import WordPvPreviewer from '@/previewers/word'
 import './style.css'
 
 export default {
@@ -23,8 +22,6 @@ export default {
         return (
           <ExcelPreviewer ref='excelPV' {...{ attrs: this.excelPvProps }} />
         )
-      case 'word':
-        return <WordPvPreviewer ref='wordPV' {...{ attrs: this.wordPvProps }} />
     }
   },
   props: {
@@ -39,11 +36,6 @@ export default {
     },
     // img-previewer props
     excelPvProps: {
-      type: Object,
-      default: () => ({})
-    },
-    // word-previewer props
-    wordPvProps: {
       type: Object,
       default: () => ({})
     }

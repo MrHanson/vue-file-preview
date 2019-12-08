@@ -37,7 +37,6 @@
   },
   "dependencies": {
     "@laomao800/parse-size-with-unit": "^1.0.0",
-    "mammoth": "^1.4.9",
     "viewerjs": "^1.3.6",
     "xlsx": "^0.15.1"
   },

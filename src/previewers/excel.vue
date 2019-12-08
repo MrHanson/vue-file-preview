@@ -65,7 +65,6 @@ export default {
 
       this.sheetTabs = sheets.map(sheet => sheet.name)
       this.sheetDatas = this._formateSheets(sheets.map(sheet => sheet.content))
-      console.log(this.sheetDatas)
 
       this.selectedTab = 0
     }

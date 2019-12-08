@@ -7,7 +7,6 @@
         file-type="excel"
         :img-pv-props="imgPvProps"
         :excel-pv-props="excelPvProps"
-        :word-pv-props="wordPvProps"
       >
       </file-preview>
     </div>
@@ -42,8 +41,7 @@ export default {
       excelPvProps: {
         file: null,
         tableHeight: '300'
-      },
-      wordPvProps: {}
+      }
     }
   },
 
