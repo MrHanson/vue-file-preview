@@ -23,7 +23,7 @@ export default {
   render() {
     if (this.enableFixed) {
       return (
-        <div class='pv-table__body' style={{ height: this.height }}>
+        <div class='pv-table__body' style={{ maxHeight: this.height }}>
           <table>
             <colgroup>
               {this.columns.map((column, index) =>
@@ -36,7 +36,7 @@ export default {
             </colgroup>
             <tbody>
               {this.contentData.map((row, i) => (
-                <tr key={'r' + i} on-mouseover={() => this.$emit('hover')}>
+                <tr key={'r' + i}>
                   {this.columns.map((col, j) =>
                     col.fixed ? (
                       <td key={'c' + j} style={{ textAlign: col.align }}>
@@ -56,7 +56,7 @@ export default {
     return (
       <div
         class='pv-table__body'
-        style={{ height: this.height }}
+        style={{ maxHeight: this.height }}
         on-scroll={this.handleScroll}
       >
         <table>
@@ -67,7 +67,7 @@ export default {
           </colgroup>
           <tbody>
             {this.contentData.map((row, i) => (
-              <tr key={'r' + i} on-mouseover={() => this.$emit('hover')}>
+              <tr key={'r' + i}>
                 {this.columns.map((col, j) => (
                   <td key={'c' + j} style={{ textAlign: col.align }}>
                     {row[col['prop']]}

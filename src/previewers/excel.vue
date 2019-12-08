@@ -1,21 +1,22 @@
 <template>
   <div id="excel-previewer">
-    <div class="sheet-tab-wrap">
-      <span
-        class="sheet-tab"
-        :class="selectedTab === sheetNames ? 'selected' : ''"
-        v-for="(name, index) in sheetNames"
-        :key="index"
-        @click="handleTblChange(index)"
-      >
-        {{ name }}
-      </span>
-    </div>
-    <div class="tbl-wrap"></div>
+    <PvTabs :active.sync="selectedTab">
+      <PvTable
+        v-for="(sheetData, index) in sheetDatas"
+        :name="sheetTabs[index]"
+        :key="'d' + index"
+        :height="tableHeight"
+        :table-columns="sheetDatas[index]['tableColumns']"
+        :content-data="sheetDatas[index]['contentData']"
+      />
+    </PvTabs>
   </div>
 </template>
 
 <script>
+import PvTabs from '@/components/pv-tabs'
+import PvTable from '@/components/pv-table'
+
 // prettier-ignore
 import { file2Uint8Arr, Obj2Arr, getAlphaArr, getAlphaIndex } from '@/mixin/util'
 import XLSX from 'xlsx'
@@ -23,104 +24,126 @@ import XLSX from 'xlsx'
 export default {
   name: 'ExcelPreviewer',
   props: {
-    excelList: {
-      type: Array,
-      default: () => []
+    file: {
+      type: [Object, File],
+      default: null
+    },
+    isClientStream: {
+      type: Boolean, // judge if client file stream or not
+      default: true
+    },
+    tableHeight: {
+      type: [String, Number],
+      default: ''
     }
   },
   data() {
     return {
-      sheetNames: [],
+      sheetTabs: [],
       sheetDatas: [],
-      selectedTab: '',
-      tblData: []
+      selectedTab: -1
     }
   },
   watch: {
-    async excelList(curList) {
+    async file(val) {
       this.resetData()
-      // prettier-ignore
-      const promiseArr = curList.map(f => file2Uint8Arr(f))
-      if (promiseArr.length <= 0) {
+
+      if (!val) return
+
+      // filter unavailable file
+      if (
+        this.isClientStream &&
+        String(val.type).indexOf('excel') < 0 &&
+        String(val.type).indexOf('sheet') < 0
+      ) {
         return
       }
-      const collections = Promise.all(promiseArr)
-      console.log(collections)
-      const dataList = await collections
-      dataList.forEach(data => {
-        const workbook = XLSX.read(data, { type: 'array' })
-        const sheets = Obj2Arr(workbook.Sheets)
 
-        this.sheetNames = this.sheetNames.concat(
-          sheets.map(sheet => sheet.name)
-        )
-        this.sheetDatas = this.sheetDatas.concat(
-          this._formateSheets(sheets.map(sheet => sheet.content))
-        )
-      })
+      const data = await file2Uint8Arr(val)
+      const workbook = XLSX.read(data, { type: 'array' })
+      const sheets = Obj2Arr(workbook.Sheets)
 
-      this.selectedTab = this.sheetNames[0][0]
-      this.tblData = this.sheetDatas[0][0]
+      this.sheetTabs = sheets.map(sheet => sheet.name)
+      this.sheetDatas = this._formateSheets(sheets.map(sheet => sheet.content))
+      console.log(this.sheetDatas)
+
+      this.selectedTab = 0
     }
   },
+
+  components: {
+    PvTabs,
+    PvTable
+  },
+
   methods: {
-    handleTblChange(sheetIndex) {
-      this.selectedTab = sheetIndex
-      this.tblData = this.sheetDatas[sheetIndex]
-      console.log(this.tblData)
-    },
     resetData() {
-      this.sheetNames = []
+      this.sheetTabs = []
       this.sheetDatas = []
-      this.selectedTab = ''
-      this.tblData = []
+      this.selectedTab = -1
+    },
+    _getAvailFileList(fileList = []) {
+      if (!this.isClientStream) return []
+      return Array.prototype.filter.call(
+        fileList,
+        f =>
+          f.type &&
+          (String(f.type).indexOf('excel') > 0 ||
+            String(f.type).indexOf('sheet') > 0)
+      )
     },
     _formateSheets(contents) {
       if (!Array.isArray(contents)) {
         return []
       }
-      console.log(contents)
       return contents.map(content => {
-        const columns = ['all']
-        const data = []
+        let totalRow = 0
 
+        let tableColumns = []
         Object.keys(content).forEach(key => {
           if (key === '!ref') {
-            const range = content[key].match(/[\w]:[\w]/g)
-            const start = getAlphaIndex(range[0])
-            const end = getAlphaIndex(range[1])
+            const range = content[key].match(/\w+\w+/g)
+            // range eg: ['B2', 'I10']
+            // prettier-ignore
+            const start = getAlphaIndex(range[0][0])
+            const end = getAlphaIndex(range[1][0])
 
-            getAlphaArr(start, end)
+            const max = range[1].match(/\d+/)[0]
+            const min = range[0].match(/\d+/)[0]
+            totalRow = Math.abs(parseInt(max) - parseInt(min)) + 1
+
+            tableColumns = getAlphaArr(start, end).map(alpha => ({
+              label: alpha,
+              prop: alpha
+            }))
           }
         })
-        return { columns, data }
+
+        // fixed index column
+        if (tableColumns.length > 0) {
+          tableColumns.unshift({
+            label: '#',
+            prop: 'index',
+            fixed: true,
+            align: 'center',
+            width: 40
+          })
+        }
+
+        const contentData = new Array(totalRow).fill().map(() => ({}))
+        Object.keys(content).forEach(key => {
+          if (key.indexOf('!') !== -1) return
+
+          const index = parseInt(key[1])
+          const label = key[0]
+          contentData[index - 1][label] = content[key].w
+        })
+        if (contentData.length > 0)
+          contentData.forEach((row, index) => (row.index = index + 1))
+
+        return { tableColumns, contentData }
       })
     }
   }
 }
 </script>
-
-<style lang="less" scoped>
-.sheet-tab {
-  border: 1px solid #d6d6d6;
-}
-
-#excel-previewer {
-  box-sizing: border-box;
-  .sheet-tab {
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-    border-bottom: none;
-    padding: 6px 6px 0 6px;
-    line-height: 16px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    &.selected {
-      color: lightpink;
-    }
-    &:hover {
-      background: #d6d6d6;
-    }
-  }
-}
-</style>

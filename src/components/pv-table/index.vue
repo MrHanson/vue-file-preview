@@ -35,6 +35,7 @@ import tableFixed from './table-fixed'
 import parseSize from '@laomao800/parse-size-with-unit'
 
 export default {
+  name: 'PvTable',
   props: {
     tableColumns: {
       type: Array,
@@ -70,16 +71,15 @@ export default {
     }
   },
 
-  mounted() {
-    this.$nextTick(() => {
-      // dynamtic computed gutter width
-      const { clientWidth, offsetWidth } = this.$refs['tableBody'].$el
-      this.gutterWidth = Math.abs(clientWidth - offsetWidth) - 1
+  async mounted() {
+    await this.$nextTick()
+    // dynamtic computed gutter width
+    const { clientWidth, offsetWidth } = this.$refs['tableBody'].$el
+    this.gutterWidth = Math.abs(clientWidth - offsetWidth) - 1
 
-      const { offsetHeight } = this.$refs['tableHeader'].$el
-      // get height of header
-      this.headerHeight = parseSize(offsetHeight)
-    })
+    const { offsetHeight } = this.$refs['tableHeader'].$el
+    // get height of header
+    this.headerHeight = parseSize(offsetHeight)
   },
 
   watch: {

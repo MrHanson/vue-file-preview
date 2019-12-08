@@ -95,18 +95,20 @@ export function getAlphaArr(startIndex = 0, endIndex = 25) {
  * @param {string} alpha
  * @param {Number} start
  * @return {Number}
- * @example input 'AA' output 27
+ * @example
+ *  input 'A' output 0;
+ *  input 'AA' output 26;
+ *  input 'a' output -1
  */
 export function getAlphaIndex(alpha, start = 0) {
   if (typeof alpha !== 'string') {
-    return 0
+    return -1
   }
 
-  const target = alpha.slice(start)
-  const charCode = target.charCodeAt(0)
-  const res = charCode - 64
+  const charCode = alpha.charCodeAt(0)
+  const res = charCode - 65
   if (charCode < 65 || charCode > 90) {
-    return 0
+    return -1
   }
   if (alpha && alpha.length === 1) {
     return res
