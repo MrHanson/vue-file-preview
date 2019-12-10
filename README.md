@@ -37,7 +37,7 @@
 
 | prop           | type   | default | optional | description                                                     |
 | -------------- | ------ | ------- | -------- | --------------------------------------------------------------- |
-| coverList      | array  | --      |          | choose which previewer to use                                   |
+| coverList      | array  | --      |          | cover item list, if not pass would open fullscreen mode         |
 | previewSrcList | array  | --      |          | src list to preview                                             |
 | width          | string | '100px' |          | width of coverList item                                         |
 | height         | string | '100px' |          | height of coverList item                                        |

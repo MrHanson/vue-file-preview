@@ -37,13 +37,6 @@ module.exports = {
         nav: [
           { text: 'Guide', link: '/' },
           {
-            text: 'Previewer Detail',
-            items: [
-              { text: 'img-previewer', link: '/previewers/img' },
-              { text: 'excel-previewer', link: '/previewers/excel' }
-            ]
-          },
-          {
             text: 'CHANGELOG',
             link:
               'https://github.com/MrHanson/vue-file-preview/blob/release/CHANGELOG.md'
@@ -55,11 +48,15 @@ module.exports = {
         ],
         sidebar: {
           '/': [
-            ['/', ''],
+            ['/', 'Guide'],
             {
-              title: 'Guide',
+              title: 'Previewers',
               collapsable: false,
-              children: []
+              children: [
+                ['/previewers/file.md', 'file-preview'],
+                ['/previewers/img.md', 'img-previewer'],
+                ['/previewers/excel.md', 'excel-previewer']
+              ]
             }
           ]
         }
@@ -72,13 +69,6 @@ module.exports = {
         nav: [
           { text: '指南', link: '/zh/' },
           {
-            text: 'Previewer 详情',
-            items: [
-              { text: 'img-previewer', link: '/zh/previewers/img' },
-              { text: 'excel-previewer', link: '/zh/previewers/excel' }
-            ]
-          },
-          {
             text: 'CHANGELOG',
             link:
               'https://github.com/MrHanson/vue-file-preview/blob/release/CHANGELOG.md'
@@ -90,15 +80,26 @@ module.exports = {
         ],
         sidebar: {
           '/': [
-            ['/', ''],
+            ['/', 'Guide'],
             {
-              title: '指南',
+              title: 'Previewers',
               collapsable: false,
-              children: []
+              children: [
+                ['/zh/previewers/file.md', 'file-preview'],
+                ['/zh/previewers/img.md', 'img-previewer'],
+                ['/zh/previewers/excel.md', 'excel-previewer']
+              ]
             }
           ]
         }
       }
     }
-  }
+  },
+  configureWebpack: () => ({
+    resolve: {
+      alias: {
+        '@': path.join(__dirname, '../../src')
+      }
+    }
+  })
 }

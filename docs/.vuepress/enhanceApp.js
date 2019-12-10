@@ -1,15 +1,15 @@
+import DemoBox from '@laomao800/vue-demo-box'
 import ImgPreviewer from '../../src/previewers/img.vue'
-import ExcelPreviewer from '../../src/previewers/excel.vue'
 
 ImgPreviewer.install = function(Vue) {
   Vue.component(ImgPreviewer.name, ImgPreviewer)
 }
 
-ExcelPreviewer.install = function(Vue) {
-  Vue.component(ExcelPreviewer.name, ExcelPreviewer)
+DemoBox.install = function(Vue) {
+  Vue.component(DemoBox.name, DemoBox)
 }
 
 export default ({ Vue }) => {
   Vue.use(ImgPreviewer)
-  Vue.use(ExcelPreviewer)
+  Vue.use(DemoBox)
 }

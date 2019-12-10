@@ -41,7 +41,7 @@ export default {
     }
   },
   methods: {
-    openImgViewer(index = 0) {
+    openViewer(index = 0) {
       this.$refs['imgPV'].openViewer(index)
     }
   }
