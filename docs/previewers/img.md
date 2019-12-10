@@ -2,6 +2,7 @@
 
 ## basic usage
 
+<ClientOnly>
 <demo-box>
 
 <demo-img-simple slot="demo"></demo-img-simple>
@@ -13,9 +14,11 @@
 </template>
 
 </demo-box>
+</ClientOnly>
 
 ## custom layout
 
+<ClientOnly>
 <demo-box>
 
 <demo-img-layout slot="demo"></demo-img-layout>
@@ -27,6 +30,7 @@
 </template>
 
 </demo-box>
+</ClientOnly>
 
 ## Props
 
