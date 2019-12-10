@@ -11,7 +11,7 @@ module.exports = {
     extract: true
   },
   chainWebpack: config => {
-    config.module.rule('js').exclude.add(/dist/)
+    config.module.rule('js').exclude.add(/release/)
   },
   configureWebpack: config => {
     // close webpack performace warning
@@ -31,7 +31,8 @@ module.exports = {
     }
 
     const version = process.env.VERSION || require('./package.json').version
-    const banner = `Vue File Preview v${version}`
+    const banner =
+      '\n' + ' * @preserve\n' + ` * @MrHanson/vue-file-preview v${version}\n`
     const webpack = require('webpack')
     config.plugins.push(new webpack.BannerPlugin(banner))
   }
