@@ -1,15 +1,15 @@
 # vue-file-preview
 
-## Description
+## 简介
 
-A file preview component by Vue , maked up by serval previewer components
+一个由多个 previewers 子组件组成的文件预览 Vue 组件
 
-## Filetype Support
+## 支持文件类型
 
 - img
 - excel
 
-## Install
+## 安装
 
 ```bash
   npm install --save vue '@mrhanson/vue-file-preview'
@@ -17,11 +17,11 @@ A file preview component by Vue , maked up by serval previewer components
   yarn add vue '@mrhanson/vue-file-preview'
 ```
 
-## Usage
+## 使用
 
 ### ESModule
 
-- global
+- 全局
 
 ```js
 import Vue from 'vue'
@@ -29,7 +29,7 @@ import FilePreview from 'vue-file-preview'
 Vue.use(FilePreview)
 ```
 
-- Vue compoent
+- Vue 组件
 
 ```html
 <template>

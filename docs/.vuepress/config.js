@@ -80,7 +80,7 @@ module.exports = {
         ],
         sidebar: {
           '/': [
-            ['/', 'Guide'],
+            ['/', '指南'],
             {
               title: 'Previewers',
               collapsable: false,
