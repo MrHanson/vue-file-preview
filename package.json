@@ -10,7 +10,7 @@
   "files": [
     "release",
     "src",
-    "types.d.ts"
+    "type.d.ts"
   ],
   "description": "A file preview component by Vue",
   "author": {

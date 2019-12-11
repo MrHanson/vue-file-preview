@@ -25,7 +25,8 @@ A file preview component by Vue , maked up by serval previewer components
 
 ```js
 import Vue from 'vue'
-import FilePreview from 'vue-file-preview'
+import FilePreview from '@mrhanson/vue-file-preview'
+import '@mrhanson/vue-file-preview/file-preview.css'
 Vue.use(FilePreview)
 ```
 
@@ -38,6 +39,7 @@ Vue.use(FilePreview)
 
 <script>
   import filePreview from '@mrhanson/vue-file-preview'
+  import '@mrhanson/vue-file-preview/file-preview.css'
 
   export default {
     data() {
