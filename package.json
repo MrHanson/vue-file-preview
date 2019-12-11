@@ -9,7 +9,8 @@
   "style": "release/file-preview.css",
   "files": [
     "release",
-    "src"
+    "src",
+    "types.d.ts"
   ],
   "description": "A file preview component by Vue",
   "author": {
