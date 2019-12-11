@@ -1,3 +1,12 @@
+## [1.0.2](https://github.com/MrHanson/vue-file-preview/compare/v1.0.1...v1.0.2) (2019-12-11)
+
+
+### Features
+
+* typescript friendly ([faf517d](https://github.com/MrHanson/vue-file-preview/commit/faf517d70d5db2acdb526ad454faf4a5fc9450e2))
+
+
+
 ## [1.0.1](https://github.com/MrHanson/vue-file-preview/compare/v1.0.0...v1.0.1) (2019-12-11)
 
 
