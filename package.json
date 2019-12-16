@@ -1,48 +1,32 @@
 {
   "name": "@mrhanson/vue-file-preview",
   "version": "1.0.2",
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
-  },
-  "main": "release/file-preview.common.js",
-  "style": "release/file-preview.css",
-  "files": [
-    "release",
-    "src",
-    "type.d.ts"
-  ],
   "description": "A file preview component by Vue",
   "author": {
     "name": "mrhanson",
     "email": "chihanghanson@gmail.com"
   },
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/MrHanson/vue-file-preview"
-  },
-  "bugs": {
-    "url": "https://github.com/MrHanson/vue-file-preview/issues"
-  },
   "scripts": {
     "dev": "vue-cli-service serve --open",
-    "lint": "vue-cli-service lint",
-    "release": "node scripts/release.js",
-    "release:gh-pages": "git push -d origin gh-pages && git subtree push --prefix=docs/.vuepress/dist origin gh-pages",
     "build": "vue-cli-service build --target lib --name file-preview src/index.js",
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs",
     "test:unit": "vue-cli-service test:unit",
-    "test:unit:cover": "rimraf tests/unit/*/__snapshots__ && vue-cli-service test:unit --coverage"
+    "test:unit:cover": "rimraf tests/unit/*/__snapshots__ && vue-cli-service test:unit --coverage",
+    "lint": "vue-cli-service lint",
+    "docs:build": "vuepress build docs",
+    "docs:dev": "vuepress dev docs",
+    "release": "node scripts/release.js",
+    "release:gh-pages": "git push -d origin gh-pages && git subtree push --prefix=docs/.vuepress/dist origin gh-pages"
   },
+  "main": "release/file-preview.common.js",
+  "files": [
+    "release",
+    "src",
+    "type.d.ts"
+  ],
   "dependencies": {
     "@laomao800/parse-size-with-unit": "^1.0.0",
-    "viewerjs": "^1.3.6",
+    "element-ui": "^2.13.0",
     "xlsx": "^0.15.1"
-  },
-  "peerDependencies": {
-    "vue": "^2.6.10"
   },
   "devDependencies": {
     "@babel/core": "^7.7.5",
@@ -55,6 +39,7 @@
     "@vue/test-utils": "1.0.0-beta.29",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^23.6.0",
+    "babel-plugin-component": "^1.1.1",
     "compression-webpack-plugin": "^3.0.0",
     "conventional-changelog": "^3.1.10",
     "core-js": "^3.4.8",
@@ -76,18 +61,34 @@
     "vuepress": "^1.2.0",
     "webpack-node-externals": "^1.7.2"
   },
+  "peerDependencies": {
+    "vue": "^2.6.10"
+  },
+  "bugs": {
+    "url": "https://github.com/MrHanson/vue-file-preview/issues"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
   "keywords": [
     "vue-file-preview",
     "vue",
     "component"
   ],
-  "gitHooks": {
-    "pre-commit": "lint-staged"
-  },
+  "license": "MIT",
   "lint-staged": {
     "*.{js,vue}": [
       "vue-cli-service lint",
       "git add"
     ]
-  }
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MrHanson/vue-file-preview"
+  },
+  "style": "release/file-preview.css"
 }

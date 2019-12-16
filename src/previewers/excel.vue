@@ -1,24 +1,39 @@
 <template>
   <div id="excel-previewer">
-    <PvTabs :active.sync="selectedTab">
-      <PvTable
-        v-for="(sheetData, index) in sheetDatas"
-        :name="sheetTabs[index]"
-        :key="'d' + index"
-        :height="tableHeight"
-        :table-columns="sheetDatas[index]['tableColumns']"
-        :content-data="sheetDatas[index]['contentData']"
-      />
-    </PvTabs>
+    <el-tabs type="border-card">
+      <el-tab-pane
+        v-for="(tab, index) in sheetTabs"
+        :key="'tab' + index"
+        :label="tab"
+      >
+        <template v-for="(sheet, j) in sheetDatas">
+          <el-table
+            :height="tableHeight"
+            :data="sheet.contentData"
+            :key="'tbl' + j"
+            border
+          >
+            <el-table-column
+              v-for="(column, k) in sheet.tableColumns"
+              :key="'col' + k"
+              :align="column.align"
+              :fixed="column.fixed"
+              :prop="column.prop"
+              :label="column.label"
+              :width="column.width"
+            />
+          </el-table>
+        </template>
+      </el-tab-pane>
+    </el-tabs>
   </div>
 </template>
 
 <script>
-import PvTabs from '@/components/pv-tabs'
-import PvTable from '@/components/pv-table'
+import { Table, TableColumn, Tabs, TabPane } from 'element-ui'
 
 // prettier-ignore
-import { file2Uint8Arr, Obj2Arr, getAlphaArr, getAlphaIndex } from '@/mixin/util'
+import { file2Uint8Arr, Obj2Arr, getAlphaArr, getAlphaIndex } from '@/util'
 import XLSX from 'xlsx'
 
 export default {
@@ -34,7 +49,7 @@ export default {
     },
     tableHeight: {
       type: [String, Number],
-      default: ''
+      default: '500px'
     }
   },
   data() {
@@ -71,8 +86,10 @@ export default {
   },
 
   components: {
-    PvTabs,
-    PvTable
+    'el-table': Table,
+    'el-table-column': TableColumn,
+    'el-tabs': Tabs,
+    'el-tab-pane': TabPane
   },
 
   methods: {
@@ -80,16 +97,6 @@ export default {
       this.sheetTabs = []
       this.sheetDatas = []
       this.selectedTab = -1
-    },
-    _getAvailFileList(fileList = []) {
-      if (!this.isClientStream) return []
-      return Array.prototype.filter.call(
-        fileList,
-        f =>
-          f.type &&
-          (String(f.type).indexOf('excel') > 0 ||
-            String(f.type).indexOf('sheet') > 0)
-      )
     },
     _formateSheets(contents) {
       if (!Array.isArray(contents)) {

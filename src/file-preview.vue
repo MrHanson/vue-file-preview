@@ -1,7 +1,6 @@
 <script>
 import ImgPreviewer from '@/previewers/img.vue'
 import ExcelPreviewer from '@/previewers/excel'
-import './style.css'
 
 export default {
   name: 'FilePreview',
@@ -9,15 +8,7 @@ export default {
   render(h) {
     switch (this.fileType) {
       case 'img':
-        return (
-          <ImgPreviewer
-            ref='imgPV'
-            {...{ attrs: this.imgPvProps }}
-            scopedSlots={{
-              default: () => this.$slots.default
-            }}
-          />
-        )
+        return <ImgPreviewer ref='imgPV' {...{ attrs: this.imgPvProps }} />
       case 'excel':
         return (
           <ExcelPreviewer ref='excelPV' {...{ attrs: this.excelPvProps }} />
@@ -38,11 +29,6 @@ export default {
     excelPvProps: {
       type: Object,
       default: () => ({})
-    }
-  },
-  methods: {
-    openViewer(index = 0) {
-      this.$refs['imgPV'].openViewer(index)
     }
   }
 }
