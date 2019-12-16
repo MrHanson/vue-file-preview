@@ -10,8 +10,6 @@ declare class FilePreview extends Component {
   imgPvProps: ImgPreviewerProps
 
   excelPvProps: ExcelPreviewerProps
-
-  openViewer: (index: number) => void
 }
 
 declare class ImgPreviewer extends ImgPreviewerProps {}
@@ -26,8 +24,6 @@ declare class ImgPreviewerProps extends Vue {
   height?: string
 
   alt?: string
-
-  viewerOptions?: object
 }
 
 declare class ExcelPreviewer extends Component {}

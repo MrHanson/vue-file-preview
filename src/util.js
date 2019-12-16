@@ -83,26 +83,25 @@ export function getAlphaArr(startIndex = 0, endIndex = 25) {
 /**
  * @description get alpha string index
  * @param {string} alpha
- * @param {Number} start
  * @return {Number}
  * @example
  *  input 'A' output 0;
  *  input 'AA' output 26;
  *  input 'a' output -1
  */
-export function getAlphaIndex(alpha, start = 0) {
+export function getAlphaIndex(alpha) {
   if (typeof alpha !== 'string') {
     return -1
   }
 
-  const charCode = alpha.charCodeAt(0)
-  const res = charCode - 65
-  if (charCode < 65 || charCode > 90) {
-    return -1
-  }
-  if (alpha && alpha.length === 1) {
-    return res
-  }
+  let res = 0
+  for (let i = alpha.length; i > 0; i--) {
+    const charCode = alpha.charCodeAt(i) - 65
+    const acc = charCode < 65 || charCode > 90 ? -1 : charCode
 
-  return res + getAlphaIndex(alpha.slice(start + 1))
+    if (acc > -1) {
+      res += acc
+    }
+  }
+  return res
 }

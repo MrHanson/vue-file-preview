@@ -1,5 +1,5 @@
 // prettier-ignore
-import {Obj2Arr, str2Arr, getAlphaArr } from '@/util'
+import { Obj2Arr, isPlainObject ,getAlphaArr, getAlphaIndex } from '@/util'
 
 describe('convert', () => {
   it('Obj2Arr', () => {
@@ -9,13 +9,12 @@ describe('convert', () => {
     expect(Obj2Arr(ori)).toEqual(tar)
   })
 
-  it('str2Arr', () => {
-    const arr = [
-      { src: 'abc', width: '123px', height: '123px' },
-      { src: 'def' }
-    ]
-    const ori = JSON.stringify(arr)
-    expect(str2Arr(ori)).toEqual(arr)
+  it('isPlainObject', () => {
+    var ctr = function() {
+      this.text = 'hello world'
+    }
+    var instance = new ctr()
+    expect(isPlainObject(instance)).toBe(false)
   })
 })
 
@@ -24,5 +23,9 @@ describe('get attribute', () => {
     // prettier-ignore
     const tar = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     expect(getAlphaArr()).toEqual(tar)
+  })
+
+  it('getAlphaIndex', () => {
+    expect(getAlphaIndex('AA')).toEqual(26)
   })
 })

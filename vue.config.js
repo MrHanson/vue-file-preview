@@ -8,7 +8,7 @@ module.exports = {
   productionSourceMap: false,
   css: {
     sourceMap: process.env.NODE_ENV !== 'production',
-    extract: true
+    extract: false
   },
   chainWebpack: config => {
     config.module.rule('js').exclude.add(/release/)
