@@ -1,4 +1,5 @@
 module.exports = {
+  printWidth: 100,
   jsxSingleQuote: true,
   singleQuote: true,
   semi: false,

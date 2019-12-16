@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import imgPreviewer from '@/package/img.vue'
+import imgPreviewer from '@/previewers/img.vue'
 
 const simpleSrcList = [
   'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
@@ -9,12 +9,10 @@ const complexSrcList = [
   {
     width: '100px',
     height: '100px',
-    url:
-      'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg'
+    url: 'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg'
   },
   {
-    url:
-      'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg'
+    url: 'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg'
   }
 ]
 describe('coverSrcList', () => {

@@ -1,6 +1,6 @@
 <script>
 import ImgPreviewer from '@/previewers/img.vue'
-import ExcelPreviewer from '@/previewers/excel'
+import ExcelPreviewer from '@/previewers/excel.vue'
 
 export default {
   name: 'FilePreview',
@@ -10,9 +10,7 @@ export default {
       case 'img':
         return <ImgPreviewer ref='imgPV' {...{ attrs: this.imgPvProps }} />
       case 'excel':
-        return (
-          <ExcelPreviewer ref='excelPV' {...{ attrs: this.excelPvProps }} />
-        )
+        return <ExcelPreviewer ref='excelPV' {...{ attrs: this.excelPvProps }} />
     }
   },
   props: {

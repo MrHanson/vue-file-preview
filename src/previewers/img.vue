@@ -1,5 +1,5 @@
 <template>
-  <div class="img-previewer">
+  <div id="img-previewer">
     <el-image
       v-for="(item, index) in srcList"
       :key="'cover' + index"

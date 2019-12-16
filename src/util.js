@@ -12,11 +12,7 @@ export function file2Uint8Arr(f) {
       }
       reader.readAsArrayBuffer(f)
     } else {
-      reject(
-        `[file-preview] expected File but get ${toString.call(
-          Object.getPrototypeOf(f)
-        )}`
-      )
+      reject(`[file-preview] expected File but get ${toString.call(Object.getPrototypeOf(f))}`)
     }
   })
 }
@@ -94,14 +90,13 @@ export function getAlphaIndex(alpha) {
     return -1
   }
 
-  let res = 0
-  for (let i = alpha.length; i > 0; i--) {
-    const charCode = alpha.charCodeAt(i) - 65
-    const acc = charCode < 65 || charCode > 90 ? -1 : charCode
+  let collection = []
+  for (let i = alpha.length - 1; i >= 0; i--) {
+    const charIndex = alpha.charCodeAt(i) - 64
+    if (charIndex < 0 || charIndex > 26) return -1
 
-    if (acc > -1) {
-      res += acc
-    }
+    collection.push(charIndex)
   }
-  return res
+
+  return collection.reduce((acc, cur, index) => acc + Math.pow(26, index) * cur, 0) - 1
 }

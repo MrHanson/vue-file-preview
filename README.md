@@ -35,14 +35,12 @@
 
 ### img-previewer
 
-| prop           | type   | default | optional | description                                                     |
-| -------------- | ------ | ------- | -------- | --------------------------------------------------------------- |
-| coverList      | array  | --      |          | cover item list, if not pass would open fullscreen mode         |
-| previewSrcList | array  | --      |          | src list to preview                                             |
-| width          | string | '100px' |          | width of coverList item                                         |
-| height         | string | '100px' |          | height of coverList item                                        |
-| alt            | string | --      |          | same as origin alt                                              |
-| viewerOptions  |        |         |          | [more detail](https://github.com/fengyuanchen/viewerjs#options) |
+| prop           | type   | default | optional | description                                                                                                  |
+| -------------- | ------ | ------- | -------- | ------------------------------------------------------------------------------------------------------------ |
+| coverList      | array  | --      |          | cover item list, can pass object with `url`, `alt`, `lazy`, `zIndex`, `width`, `height` attribute            |
+| previewSrcList | array  | --      |          | src list to preview, same as [preview-src-list](https://element.eleme.cn/#/zh-CN/component/image#attributes) |
+| width          | string | '100px' |          | global width of coverList item                                                                               |
+| height         | string | '100px' |          | global height of coverList item                                                                              |
 
 ### excel-previewer
 
@@ -51,71 +49,3 @@
 | file           | object        |         |          | excel file stream          |
 | isClientStream | boolean       | true    |          | whether client file stream |
 | tableHeight    | stirng/number |         |          | previewer table height     |
-
-## Slots
-
-### fileType = 'img'
-
-#### default
-
-> used for customizing layout of coverList
-
-```html
-<template>
-  <file-preview
-    ref="filePV"
-    file-type="img"
-    :md-pv-props="mdPvProps"
-    :img-pv-props="imgPvProps"
-  >
-    <div class="list">
-      <div
-        class="item"
-        v-for="(src, index) in imgPvProps.coverList"
-        :key="index"
-        @click="openViewer(index)"
-      >
-        <img :src="src" :alt="index" />
-      </div>
-    </div>
-  </file-preview>
-</template>
-
-<script>
-  export default {
-    data() {
-      return {
-        imgPvProps: {
-          coverList: [
-            'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
-            'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg',
-            'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
-            'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg',
-            'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
-            'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg'
-          ],
-          width: '250px',
-          height: '200px',
-          previewSrcList: [
-            'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
-            'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg',
-            'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
-            'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg',
-            'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
-            'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg'
-          ]
-        },
-        openViewer(index) {
-          this.$refs['filePV'].openImgViewer(index)
-        }
-      }
-    }
-  }
-</script>
-```
-
-## Methods
-
-| Methods      | Description                               | Parameters |
-| ------------ | ----------------------------------------- | ---------- |
-| openViewer() | Open Viewer by passing `index`(default 0) | index      |

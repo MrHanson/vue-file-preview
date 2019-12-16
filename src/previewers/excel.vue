@@ -1,18 +1,9 @@
 <template>
   <div id="excel-previewer">
     <el-tabs type="border-card">
-      <el-tab-pane
-        v-for="(tab, index) in sheetTabs"
-        :key="'tab' + index"
-        :label="tab"
-      >
+      <el-tab-pane v-for="(tab, index) in sheetTabs" :key="'tab' + index" :label="tab">
         <template v-for="(sheet, j) in sheetDatas">
-          <el-table
-            :height="tableHeight"
-            :data="sheet.contentData"
-            :key="'tbl' + j"
-            border
-          >
+          <el-table :height="tableHeight" :data="sheet.contentData" :key="'tbl' + j" border>
             <el-table-column
               v-for="(column, k) in sheet.tableColumns"
               :key="'col' + k"
@@ -144,8 +135,7 @@ export default {
           const label = key[0]
           contentData[index - 1][label] = content[key].w
         })
-        if (contentData.length > 0)
-          contentData.forEach((row, index) => (row.index = index + 1))
+        if (contentData.length > 0) contentData.forEach((row, index) => (row.index = index + 1))
 
         return { tableColumns, contentData }
       })
