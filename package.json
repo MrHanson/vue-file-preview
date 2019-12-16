@@ -1,6 +1,6 @@
 {
   "name": "@mrhanson/vue-file-preview",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "A file preview component by Vue",
   "author": {
     "name": "mrhanson",
