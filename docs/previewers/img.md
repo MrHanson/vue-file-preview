@@ -2,7 +2,19 @@
 
 ## basic usage
 
+<ClientOnly>
+<demo-box>
+
+<demo-img-simple slot="demo" />
+
+<template slot="code">
+
 <<< docs/.vuepress/components/demo/img/simple.vue
+
+</template>
+
+</demo-box>
+<ClientOnly>
 
 ## Props
 
