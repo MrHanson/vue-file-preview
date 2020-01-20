@@ -56,7 +56,9 @@
     "semver": "^6.3.0",
     "style-loader": "^1.0.1",
     "vue-template-compiler": "^2.6.10",
-    "vuepress": "^1.2.0"
+    "vuepress": "^1.2.0",
+    "webpack-bundle-analyzer": "^3.6.0",
+    "webpack-visualizer-plugin": "^0.1.11"
   },
   "peerDependencies": {
     "vue": "^2.6.10"

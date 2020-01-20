@@ -25,7 +25,6 @@ import { Table, TableColumn, Tabs, TabPane } from 'element-ui'
 
 // prettier-ignore
 import { file2Uint8Arr, Obj2Arr, getAlphaArr, getAlphaIndex } from '@/util'
-import XLSX from 'xlsx'
 
 export default {
   name: 'ExcelPreviewer',
@@ -66,13 +65,15 @@ export default {
       }
 
       const data = await file2Uint8Arr(val)
-      const workbook = XLSX.read(data, { type: 'array' })
-      const sheets = Obj2Arr(workbook.Sheets)
+      import('xlsx').then(({ read }) => {
+        const workbook = read(data, { type: 'array' })
+        const sheets = Obj2Arr(workbook.Sheets)
 
-      this.sheetTabs = sheets.map(sheet => sheet.name)
-      this.sheetDatas = this._formateSheets(sheets.map(sheet => sheet.content))
+        this.sheetTabs = sheets.map(sheet => sheet.name)
+        this.sheetDatas = this._formateSheets(sheets.map(sheet => sheet.content))
 
-      this.selectedTab = 0
+        this.selectedTab = 0
+      })
     }
   },
 

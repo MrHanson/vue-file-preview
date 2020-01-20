@@ -12,8 +12,8 @@ if (typeof window !== 'undefined' && window.Vue) {
 export default FilePreview
 
 // previewers
-import ImgPreviewer from './previewers/img'
-import ExcelPrviewer from './previewers/excel'
+import ImgPreviewer from './previewers/img.vue'
+import ExcelPrviewer from './previewers/excel.vue'
 
 ImgPreviewer.install = function(Vue) {
   Vue.component(ImgPreviewer.name, ImgPreviewer)

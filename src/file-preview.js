@@ -1,4 +1,3 @@
-<script>
 import ImgPreviewer from '@/previewers/img.vue'
 import ExcelPreviewer from '@/previewers/excel.vue'
 
@@ -8,9 +7,9 @@ export default {
   render(h) {
     switch (this.fileType) {
       case 'img':
-        return <ImgPreviewer ref='imgPV' {...{ attrs: this.imgPvProps }} />
+        return h(ImgPreviewer, { ref: 'imgPV', props: this.imgPvProps })
       case 'excel':
-        return <ExcelPreviewer ref='excelPV' {...{ attrs: this.excelPvProps }} />
+        return h(ExcelPreviewer, { ref: 'excelPV', props: this.excelPvProps })
     }
   },
   props: {
@@ -30,4 +29,3 @@ export default {
     }
   }
 }
-</script>

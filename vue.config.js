@@ -12,6 +12,7 @@ module.exports = {
   },
   chainWebpack: config => {
     config.module.rule('js').exclude.add(/release/)
+    config
   },
   configureWebpack: config => {
     // close webpack performace warning

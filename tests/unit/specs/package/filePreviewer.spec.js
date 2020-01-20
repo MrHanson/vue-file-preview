@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils'
-import filePreview from '@/file-preview.vue'
+import filePreview from '@/file-preview.js'
 
 describe('fileType change', () => {
   it('img', () => {
