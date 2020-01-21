@@ -48,6 +48,14 @@ export function isPlainObject(value) {
 }
 
 /**
+ * @param {*} value
+ * @return {boolean}
+ */
+export function isFunction(value) {
+  return typeof value === 'function'
+}
+
+/**
  * @param {Object} obj
  * @return {Array<Object>} { name: 'xxx', content: Object }
  */

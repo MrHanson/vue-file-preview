@@ -7,7 +7,14 @@ export default {
   render(h) {
     switch (this.fileType) {
       case 'img':
-        return h(ImgPreviewer, { ref: 'imgPV', props: this.imgPvProps })
+        return h(
+          ImgPreviewer,
+          {
+            ref: 'imgPV',
+            props: this.imgPvProps
+          },
+          this.$slots['img-error']
+        )
       case 'excel':
         return h(ExcelPreviewer, { ref: 'excelPV', props: this.excelPvProps })
     }

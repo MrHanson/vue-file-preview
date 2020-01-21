@@ -1,13 +1,26 @@
 <template>
   <div id="excel-previewer">
-    <el-tabs type="border-card">
+    <el-tabs type="border-card" v-show="sheetDatas.length > 0">
       <el-tab-pane v-for="(tab, index) in sheetTabs" :key="'tab' + index" :label="tab">
-        <template v-for="(sheet, j) in sheetDatas">
-          <el-table :height="tableHeight" :data="sheet.contentData" :key="'tbl' + j" border>
+        <template>
+          <el-table
+            :height="tableHeight"
+            :data="sheetDatas[index].contentData"
+            :key="'tbl' + index"
+            border
+          >
             <el-table-column
-              v-for="(column, k) in sheet.tableColumns"
+              v-if="sheetDatas[index].contentData.length > 0"
+              label="#"
+              type="index"
+              width="40"
+              align="center"
+            >
+            </el-table-column>
+            <el-table-column
+              v-for="(column, k) in sheetDatas[index].tableColumns"
               :key="'col' + k"
-              :align="column.align"
+              :align="column.align || 'center'"
               :fixed="column.fixed"
               :prop="column.prop"
               :label="column.label"
@@ -24,7 +37,7 @@
 import { Table, TableColumn, Tabs, TabPane } from 'element-ui'
 
 // prettier-ignore
-import { file2Uint8Arr, Obj2Arr, getAlphaArr, getAlphaIndex } from '@/util'
+import { file2Uint8Arr, Obj2Arr, getAlphaArr, getAlphaIndex, isFunction } from '@/util'
 
 export default {
   name: 'ExcelPreviewer',
@@ -46,8 +59,11 @@ export default {
     return {
       sheetTabs: [],
       sheetDatas: [],
-      selectedTab: -1
+      xlsxRead: null
     }
+  },
+  created() {
+    this._importXLSX()
   },
   watch: {
     async file(val) {
@@ -65,14 +81,13 @@ export default {
       }
 
       const data = await file2Uint8Arr(val)
-      import('xlsx').then(({ read }) => {
-        const workbook = read(data, { type: 'array' })
+
+      this._importXLSX(xlsxRead => {
+        const workbook = xlsxRead(data, { type: 'array' })
         const sheets = Obj2Arr(workbook.Sheets)
 
         this.sheetTabs = sheets.map(sheet => sheet.name)
         this.sheetDatas = this._formateSheets(sheets.map(sheet => sheet.content))
-
-        this.selectedTab = 0
       })
     }
   },
@@ -88,7 +103,6 @@ export default {
     resetData() {
       this.sheetTabs = []
       this.sheetDatas = []
-      this.selectedTab = -1
     },
     _formateSheets(contents) {
       if (!Array.isArray(contents)) {
@@ -96,49 +110,47 @@ export default {
       }
       return contents.map(content => {
         let totalRow = 0
+        const colHash = {}
 
         let tableColumns = []
+        const contentData = []
+
+        // get total row & col
         Object.keys(content).forEach(key => {
-          if (key === '!ref') {
-            const range = content[key].match(/\w+\w+/g)
-            // range eg: ['B2', 'I10']
-            // prettier-ignore
-            const start = getAlphaIndex(range[0][0])
-            const end = getAlphaIndex(range[1][0])
+          if (key.indexOf('!') < 0) {
+            const alpha = key.match(/[A-Z]+/)[0]
+            if (!colHash[alpha]) colHash[alpha] = true
 
-            const max = range[1].match(/\d+/)[0]
-            const min = range[0].match(/\d+/)[0]
-            totalRow = Math.abs(parseInt(max) - parseInt(min)) + 1
-
-            tableColumns = getAlphaArr(start, end).map(alpha => ({
-              label: alpha,
-              prop: alpha
-            }))
+            const rowIndex = key.match(/\d+/)[0]
+            if (rowIndex > totalRow) totalRow = rowIndex
+            if (!contentData[rowIndex]) {
+              contentData[rowIndex] = {}
+            }
+            contentData[rowIndex][alpha] = content[key].w
           }
         })
 
-        // fixed index column
-        if (tableColumns.length > 0) {
-          tableColumns.unshift({
-            label: '#',
-            prop: 'index',
-            fixed: true,
-            align: 'center',
-            width: 40
-          })
-        }
-
-        const contentData = new Array(totalRow).fill().map(() => ({}))
-        Object.keys(content).forEach(key => {
-          if (key.indexOf('!') !== -1) return
-
-          const index = parseInt(key[1])
-          const label = key[0]
-          contentData[index - 1][label] = content[key].w
-        })
-        if (contentData.length > 0) contentData.forEach((row, index) => (row.index = index + 1))
+        // handle tableColumns
+        tableColumns = Object.keys(colHash)
+        tableColumns.sort((a, b) => a.charCodeAt(0) - b.charCodeAt(0))
+        tableColumns = tableColumns.map(alpha => ({
+          label: alpha,
+          align: 'center',
+          prop: alpha
+        }))
 
         return { tableColumns, contentData }
+      })
+    },
+    _importXLSX(callback) {
+      import('xlsx').then(({ read }) => {
+        if (!this.xlsxRead) {
+          this.xlsxRead = read
+        }
+
+        if (isFunction(callback)) {
+          callback(this.xlsxRead)
+        }
       })
     }
   }
