@@ -19,9 +19,9 @@
   yarn add vue '@mrhanson/vue-file-preview'
 ```
 
-## Document
+## Example
 
-[中文](https://mrhanson.github.io/vue-file-preview/zh) | [English](https://mrhanson.github.io/vue-file-preview/)
+[CLICK ME](https://mrhanson.github.io/vue-file-preview/)
 
 ## Props
 
