@@ -4,6 +4,7 @@ module.exports = {
       entry: 'dev'
     }
   },
+  publicPath: '/vue-file-preview/',
   outputDir: 'release',
   productionSourceMap: false,
   css: {

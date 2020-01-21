@@ -12,7 +12,7 @@
     "test:unit": "vue-cli-service test:unit",
     "test:unit:cover": "rimraf tests/unit/*/__snapshots__ && vue-cli-service test:unit --coverage",
     "lint": "vue-cli-service lint",
-    "example:build": "vue-cli-service build --no-clean --dest example",
+    "example:build": "rimraf example && vue-cli-service build --no-clean --dest example",
     "release": "node scripts/release.js",
     "release:gh-pages": "git push -d origin gh-pages && git subtree push --prefix=example origin gh-pages"
   },

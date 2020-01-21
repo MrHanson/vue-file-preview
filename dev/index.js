@@ -10,6 +10,9 @@ import 'normalize.css'
 Vue.config.productionTip = false
 Vue.config.performance = true
 
+import element from 'element-ui'
+Vue.use(element)
+
 new Vue({
   render: h => h(App)
 }).$mount('#app')

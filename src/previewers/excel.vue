@@ -4,7 +4,7 @@
       <el-tab-pane v-for="(tab, index) in sheetTabs" :key="'tab' + index" :label="tab">
         <template>
           <el-table
-            :height="tableHeight"
+            :height="tblHeight"
             :data="sheetDatas[index].contentData"
             :key="'tbl' + index"
             border
@@ -37,6 +37,7 @@
 import { Table, TableColumn, Tabs, TabPane } from 'element-ui'
 
 import { read as xlsxRead } from 'xlsx'
+import parseSize from '@laomao800/parse-size-with-unit'
 // prettier-ignore
 import { file2Uint8Arr, Obj2Arr, isFunction } from '@/util'
 
@@ -56,6 +57,13 @@ export default {
       default: '500px'
     }
   },
+
+  computed: {
+    tblHeight() {
+      return parseSize(this.tableHeight)
+    }
+  },
+
   data() {
     return {
       sheetTabs: [],
@@ -63,6 +71,7 @@ export default {
       xlsxRead: null
     }
   },
+
   watch: {
     async file(val) {
       this.resetData()
