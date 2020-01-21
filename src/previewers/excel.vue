@@ -37,7 +37,7 @@
 import { Table, TableColumn, Tabs, TabPane } from 'element-ui'
 
 // prettier-ignore
-import { file2Uint8Arr, Obj2Arr, getAlphaArr, getAlphaIndex, isFunction } from '@/util'
+import { file2Uint8Arr, Obj2Arr, isFunction } from '@/util'
 
 export default {
   name: 'ExcelPreviewer',
