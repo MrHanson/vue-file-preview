@@ -51,7 +51,7 @@
               </div>
             </template>
           </el-form-item>
-          <el-form-item label="previewSrcList">
+          <el-form-item label="previewSrcList" style="margin: 16px 0;">
             <el-input
               v-for="(pSrc, j) in imgPvProps.previewSrcList"
               :key="'pSrc' + j"

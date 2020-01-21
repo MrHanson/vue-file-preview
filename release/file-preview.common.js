@@ -56841,12 +56841,12 @@ var component = normalizeComponent(
 )
 
 /* harmony default export */ var img = (component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3f2afade-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/previewers/excel.vue?vue&type=template&id=143db2d8&
-var excelvue_type_template_id_143db2d8_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"excel-previewer"}},[_c('el-tabs',{directives:[{name:"show",rawName:"v-show",value:(_vm.sheetDatas.length > 0),expression:"sheetDatas.length > 0"}],attrs:{"type":"border-card"}},_vm._l((_vm.sheetTabs),function(tab,index){return _c('el-tab-pane',{key:'tab' + index,attrs:{"label":tab}},[[_c('el-table',{key:'tbl' + index,attrs:{"height":_vm.tableHeight,"data":_vm.sheetDatas[index].contentData,"border":""}},[(_vm.sheetDatas[index].contentData.length > 0)?_c('el-table-column',{attrs:{"label":"#","type":"index","width":"40","align":"center"}}):_vm._e(),_vm._l((_vm.sheetDatas[index].tableColumns),function(column,k){return _c('el-table-column',{key:'col' + k,attrs:{"align":column.align || 'center',"fixed":column.fixed,"prop":column.prop,"label":column.label,"width":column.width}})})],2)]],2)}),1)],1)}
-var excelvue_type_template_id_143db2d8_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3f2afade-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/previewers/excel.vue?vue&type=template&id=0fa33d80&
+var excelvue_type_template_id_0fa33d80_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{attrs:{"id":"excel-previewer"}},[_c('el-tabs',{directives:[{name:"show",rawName:"v-show",value:(_vm.sheetDatas.length > 0),expression:"sheetDatas.length > 0"}],attrs:{"type":"border-card"}},_vm._l((_vm.sheetTabs),function(tab,index){return _c('el-tab-pane',{key:'tab' + index,attrs:{"label":tab}},[[_c('el-table',{key:'tbl' + index,attrs:{"height":_vm.tblHeight,"data":_vm.sheetDatas[index].contentData,"border":""}},[(_vm.sheetDatas[index].contentData.length > 0)?_c('el-table-column',{attrs:{"label":"#","type":"index","width":"40","align":"center"}}):_vm._e(),_vm._l((_vm.sheetDatas[index].tableColumns),function(column,k){return _c('el-table-column',{key:'col' + k,attrs:{"align":column.align || 'center',"fixed":column.fixed,"prop":column.prop,"label":column.label,"width":column.width}})})],2)]],2)}),1)],1)}
+var excelvue_type_template_id_0fa33d80_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/previewers/excel.vue?vue&type=template&id=143db2d8&
+// CONCATENATED MODULE: ./src/previewers/excel.vue?vue&type=template&id=0fa33d80&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.index-of.js
 var es_array_index_of = __webpack_require__("c975");
@@ -56950,6 +56950,7 @@ var xlsx = __webpack_require__("1146");
 //
 //
 //
+
  // prettier-ignore
 
 
@@ -56968,6 +56969,11 @@ var xlsx = __webpack_require__("1146");
     tableHeight: {
       type: [String, Number],
       default: '500px'
+    }
+  },
+  computed: {
+    tblHeight: function tblHeight() {
+      return parse_size_with_unit_default()(this.tableHeight);
     }
   },
   data: function data() {
@@ -57094,8 +57100,8 @@ var xlsx = __webpack_require__("1146");
 
 var excel_component = normalizeComponent(
   previewers_excelvue_type_script_lang_js_,
-  excelvue_type_template_id_143db2d8_render,
-  excelvue_type_template_id_143db2d8_staticRenderFns,
+  excelvue_type_template_id_0fa33d80_render,
+  excelvue_type_template_id_0fa33d80_staticRenderFns,
   false,
   null,
   null,
