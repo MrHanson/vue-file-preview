@@ -35,10 +35,10 @@ const release = async () => {
   const version = customVersion || versions[bump]
   process.env.VERSION = version
 
-  const { genDocs } = await inquirer.prompt([
+  const { updateExample } = await inquirer.prompt([
     {
-      name: 'genDocs',
-      message: `Generate ${version} docs?`,
+      name: 'updateExample',
+      message: `Update ${version} example?`,
       type: 'confirm'
     }
   ])
@@ -53,18 +53,16 @@ const release = async () => {
 
   if (yes) {
     await execa('npm', ['run', 'build'], { stdio: 'inherit' })
-    if (genDocs) {
-      await execa('npm', ['run', 'docs:build'], { stdio: 'inherit' })
-      await execa('git', ['add', 'docs/.vuepress/dist'], { stdio: 'inherit' })
-      await execa('git', ['commit', '-m', `build: docs ${version}`], {
+    if (updateExample) {
+      await execa('npm', ['run', 'example:build'], { stdio: 'inherit' })
+      await execa('git', ['add', 'example'], { stdio: 'inherit' })
+      await execa('git', ['commit', '-m', `docs: example ${version}`], {
         stdio: 'inherit'
       })
     }
-    await execa(
-      'npm',
-      ['version', version, '-m', `build: release ${version}`],
-      { stdio: 'inherit' }
-    )
+    await execa('npm', ['version', version, '-m', `build: release ${version}`], {
+      stdio: 'inherit'
+    })
   }
 
   require('./gen-changelog')(version)
