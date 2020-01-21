@@ -1,7 +1,7 @@
 /*!
  * 
  *  * @preserve
- *  * @MrHanson/vue-file-preview v1.1.0
+ *  * @MrHanson/vue-file-preview v1.2.0
  * 
  */
 module.exports =

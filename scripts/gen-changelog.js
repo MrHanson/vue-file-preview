@@ -16,10 +16,8 @@ module.exports = version => {
     .pipe(fileStream)
     .on('close', async () => {
       await execa('git', ['add', 'CHANGELOG.md'], { stdio: 'inherit' })
-      await execa(
-        'git',
-        ['commit', '-m', `chore: ${version} changelog [ci skip]`],
-        { stdio: 'inherit' }
-      )
+      await execa('git', ['commit', '-m', `chore: ${version} changelog [ci skip]`], {
+        stdio: 'inherit'
+      })
     })
 }
