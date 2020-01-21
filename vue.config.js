@@ -1,7 +1,7 @@
 module.exports = {
   pages: {
     index: {
-      entry: 'example'
+      entry: 'dev'
     }
   },
   outputDir: 'release',
