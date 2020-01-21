@@ -4,14 +4,16 @@
       v-for="(item, index) in srcList"
       :key="'cover' + index"
       fit="fill"
-      :style="{ width: item.width, height: item.height }"
+      :style="item.style"
       :src="item.url"
       :alt="item.alt"
       :lazy="item.lazy"
       :z-index="item.zIndex"
       :preview-src-list="previewSrcList"
     >
-      <slot v-slot:error></slot>
+      <template v-slot:error>
+        <slot name:img-error></slot>
+      </template>
     </el-image>
   </div>
 </template>
@@ -42,7 +44,9 @@ export default {
       default: () => []
     }
   },
-
+  created() {
+    console.log(this.$scopedSlots)
+  },
   computed: {
     coverWidth() {
       return parseSize(this.width, 'px')
@@ -53,24 +57,29 @@ export default {
     srcList() {
       const list = this.coverList.map(item => {
         if (typeof item === 'string' && !!item) {
-          return Object.assign({
+          return {
             fit: 'fill',
             zIndex: 2000,
             lazy: true,
             url: item,
-            width: parseSize(item.width) || this.coverWidth,
-            height: parseSize(item.height) || this.coverHeight
-          })
+            style: {
+              width: this.coverWidth,
+              height: this.coverHeight
+            }
+          }
         } else if (isPlainObject(item)) {
-          return Object.assign(common, {
+          return {
             fit: 'fill',
             zIndex: 2000,
             lazy: true,
             url: item.url || '',
-            width: parseSize(item.width) || this.coverWidth,
-            height: parseSize(item.height) || this.coverHeight,
+            style: {
+              width: parseSize(item.width) || this.coverWidth,
+              height: parseSize(item.height) || this.coverHeight,
+              ...item.style
+            },
             alt: item.alt || ''
-          })
+          }
         } else {
           return null
         }
