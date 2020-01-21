@@ -6,4 +6,9 @@ describe('fileType change', () => {
     const wrapper = mount(filePreview, { propsData: { fileType: 'img' } })
     expect(wrapper.find('div').attributes('id')).toContain('img-previewer')
   })
+
+  it('excel', () => {
+    const wrapper = mount(filePreview, { propsData: { fileType: 'excel' } })
+    expect(wrapper.find('div').attributes('id')).toContain('excel-previewer')
+  })
 })

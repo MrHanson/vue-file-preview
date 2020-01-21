@@ -36,6 +36,7 @@
 <script>
 import { Table, TableColumn, Tabs, TabPane } from 'element-ui'
 
+import { read as xlsxRead } from 'xlsx'
 // prettier-ignore
 import { file2Uint8Arr, Obj2Arr, isFunction } from '@/util'
 
@@ -62,9 +63,6 @@ export default {
       xlsxRead: null
     }
   },
-  created() {
-    this._importXLSX()
-  },
   watch: {
     async file(val) {
       this.resetData()
@@ -82,13 +80,11 @@ export default {
 
       const data = await file2Uint8Arr(val)
 
-      this._importXLSX(xlsxRead => {
-        const workbook = xlsxRead(data, { type: 'array' })
-        const sheets = Obj2Arr(workbook.Sheets)
+      const workbook = xlsxRead(data, { type: 'array' })
+      const sheets = Obj2Arr(workbook.Sheets)
 
-        this.sheetTabs = sheets.map(sheet => sheet.name)
-        this.sheetDatas = this._formateSheets(sheets.map(sheet => sheet.content))
-      })
+      this.sheetTabs = sheets.map(sheet => sheet.name)
+      this.sheetDatas = this._formateSheets(sheets.map(sheet => sheet.content))
     }
   },
 
@@ -140,17 +136,6 @@ export default {
         }))
 
         return { tableColumns, contentData }
-      })
-    },
-    _importXLSX(callback) {
-      import('xlsx').then(({ read }) => {
-        if (!this.xlsxRead) {
-          this.xlsxRead = read
-        }
-
-        if (isFunction(callback)) {
-          callback(this.xlsxRead)
-        }
       })
     }
   }

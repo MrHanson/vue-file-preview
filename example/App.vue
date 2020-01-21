@@ -4,7 +4,7 @@
     <div class="wrapper">
       <file-preview
         ref="filePV"
-        file-type="img"
+        file-type="excel"
         :img-pv-props="imgPvProps"
         :excel-pv-props="excelPvProps"
       >

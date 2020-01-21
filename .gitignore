@@ -5,9 +5,6 @@ Thumbs.db
 # Dependencies
 node_modules
 
-# release
-release
-
 # Dev/Build Artifacts
 /tests/e2e/videos/
 /tests/e2e/screenshots/

@@ -44,9 +44,6 @@ export default {
       default: () => []
     }
   },
-  created() {
-    console.log(this.$scopedSlots)
-  },
   computed: {
     coverWidth() {
       return parseSize(this.width, 'px')

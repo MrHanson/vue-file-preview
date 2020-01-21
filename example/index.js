@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 
 /** 引入FilePreview */
-import FilePreview from '@/'
+import FilePreview from '../release/file-preview.common'
 Vue.use(FilePreview)
 
 import 'normalize.css'

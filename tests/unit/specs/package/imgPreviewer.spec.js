@@ -7,8 +7,10 @@ const simpleSrcList = [
 ]
 const complexSrcList = [
   {
-    width: '100px',
-    height: '100px',
+    style: {
+      width: '100px',
+      height: '100px'
+    },
     url: 'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg'
   },
   {
