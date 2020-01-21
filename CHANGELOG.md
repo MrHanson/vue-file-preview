@@ -1,3 +1,12 @@
+# [1.2.0](https://github.com/MrHanson/vue-file-preview/compare/v1.1.0...v1.2.0) (2020-01-21)
+
+
+### Features
+
+* img-previewer: add cover style ([9f9cbe1](https://github.com/MrHanson/vue-file-preview/commit/9f9cbe13f23a5982cfeabe51b4c26c3ec517fef7))
+
+
+
 # [1.1.0](https://github.com/MrHanson/vue-file-preview/compare/v1.0.2...v1.1.0) (2019-12-16)
 
 
