@@ -15,48 +15,85 @@
     <div class="section right">
       <el-form label-width="120px">
         <el-form-item label="file-type">
-          <el-radio-group v-model="fileType" size="small">
+          <el-radio-group v-model="fileType" size="mini">
             <el-radio-button label="img"></el-radio-button>
             <el-radio-button label="excel"></el-radio-button>
           </el-radio-group>
         </el-form-item>
         <div v-if="fileType === 'img'">
           <el-form-item label="global width">
-            <el-input-number size="small" v-model="imgPvProps.width" :min="1"></el-input-number>
+            <el-input-number size="mini" v-model="imgPvProps.width" :min="1"></el-input-number>
           </el-form-item>
           <el-form-item label="global height">
-            <el-input-number size="small" v-model="imgPvProps.height" :min="1"></el-input-number>
+            <el-input-number size="mini" v-model="imgPvProps.height" :min="1"></el-input-number>
           </el-form-item>
+          <el-row style="height: 16px" />
           <el-form-item label="coverList">
+            <el-row>
+              <el-button
+                size="mini"
+                icon="el-icon-plus"
+                type="success"
+                circle
+                @click="addCover"
+              ></el-button>
+              <el-button
+                size="mini"
+                icon="el-icon-minus"
+                type="danger"
+                circle
+                @click="removeCover"
+              ></el-button>
+            </el-row>
             <template v-for="(cover, index) in imgPvProps.coverList">
-              <div v-if="typeof cover === 'string'" :key="'c' + index">
-                <el-input :value="cover" size="small"></el-input>
-              </div>
-              <div v-else-if="typeof cover === 'object'" :key="'c' + index" style="margin: 16px 0;">
-                <div>
-                  url:
-                  <el-input style="width: 80%" :value="cover.url" size="small"></el-input>
-                </div>
-                <div>
-                  style:
-                  <el-input
-                    style="width: 80%"
-                    :value="
-                      Object.keys(cover.style)
-                        .map(key => `${key}:${cover.style[key]}`)
-                        .join(' ')
-                    "
-                  ></el-input>
-                </div>
-              </div>
+              <el-row :key="'card' + index" v-if="typeof cover === 'string'">
+                <el-input size="mini" :value="cover" />
+              </el-row>
+              <el-row :key="'card' + index" v-if="typeof cover === 'object'">
+                <el-card>
+                  <el-row v-for="key in Object.keys(cover)" :key="key">
+                    <template v-if="key === 'style'">
+                      style:
+                      <el-input
+                        v-for="keyStyle in Object.keys(cover['style'])"
+                        :key="keyStyle"
+                        size="mini"
+                        :value="cover['style'][keyStyle]"
+                      >
+                        <template v-slot:prepend>{{ keyStyle }}:</template>
+                      </el-input>
+                    </template>
+                    <el-input v-else size="mini" :value="cover[key]">
+                      <template v-slot:prepend>{{ key }}:</template>
+                    </el-input>
+                  </el-row>
+                </el-card>
+              </el-row>
             </template>
           </el-form-item>
-          <el-form-item label="previewSrcList" style="margin: 16px 0;">
+          <el-row style="height: 16px" />
+          <el-form-item label="previewSrcList">
+            <div>
+              <el-button
+                size="mini"
+                icon="el-icon-plus"
+                type="success"
+                circle
+                @click="addPreview"
+              ></el-button>
+              <el-button
+                size="mini"
+                icon="el-icon-minus"
+                type="danger"
+                circle
+                @click="removePreview"
+              ></el-button>
+            </div>
             <el-input
               v-for="(pSrc, j) in imgPvProps.previewSrcList"
               :key="'pSrc' + j"
               :value="pSrc"
-              size="small"
+              size="mini"
             ></el-input>
           </el-form-item>
         </div>
@@ -69,7 +106,7 @@
           </el-form-item>
           <el-form-item label="tableHeight">
             <el-input-number
-              size="small"
+              size="mini"
               v-model="excelPvProps.tableHeight"
               :min="1"
               label="previewer table height"
@@ -82,6 +119,8 @@
 </template>
 
 <script>
+import ItemAddDialogService from './ItemAddDialogService'
+
 export default {
   data() {
     return {
@@ -127,6 +166,44 @@ export default {
     handleFileInput(e) {
       const fileList = e.target.files
       this.excelPvProps.file = fileList[0]
+    },
+    addCover() {
+      ItemAddDialogService({
+        title: 'Add item of coverList',
+        itemTypeList: ['string', 'object'],
+        buttons: [
+          {
+            type: 'primary',
+            text: 'OK',
+            click: (propertyList, done) => {
+              this.imgPvProps.coverList = this.imgPvProps.coverList.concat(propertyList)
+              done()
+            }
+          }
+        ]
+      })
+    },
+    removeCover() {
+      this.imgPvProps.coverList.pop()
+    },
+    addPreview() {
+      ItemAddDialogService({
+        title: 'Add item of previewSrcList',
+        buttons: [
+          {
+            type: 'primary',
+            text: 'OK',
+            click: (propertyList, done) => {
+              // prettier-ignore
+              this.imgPvProps.previewSrcList = this.imgPvProps.previewSrcList.concat(propertyList)
+              done()
+            }
+          }
+        ]
+      })
+    },
+    removePreview() {
+      this.imgPvProps.previewSrcList.pop()
     }
   }
 }
