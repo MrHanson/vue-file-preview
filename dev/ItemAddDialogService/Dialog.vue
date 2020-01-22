@@ -14,24 +14,26 @@
             size="small"
             :value="pty"
           />
-          <el-card v-if="formData.itemType === 'object'">
-            <el-row v-for="key in Object.keys(pty)" :key="key">
-              <template v-if="key === 'style'">
-                style:
-                <el-input
-                  v-for="keyStyle in Object.keys(cover['style'])"
-                  :key="keyStyle"
-                  size="mini"
-                  :value="cover['style'][keyStyle]"
-                >
-                  <template v-slot:prepend>{{ keyStyle }}:</template>
+          <div v-if="formData.itemType === 'object'" style="width: 90%; display: inline-block;">
+            <el-card>
+              <el-row v-for="key in Object.keys(pty)" :key="key">
+                <template v-if="key === 'style'">
+                  style:
+                  <el-input
+                    v-for="keyStyle in Object.keys(pty['style'])"
+                    :key="keyStyle"
+                    size="mini"
+                    :value="pty['style'][keyStyle]"
+                  >
+                    <template v-slot:prepend>{{ keyStyle }}:</template>
+                  </el-input>
+                </template>
+                <el-input v-else size="mini" :value="pty[key]">
+                  <template v-slot:prepend>{{ key }}:</template>
                 </el-input>
-              </template>
-              <el-input v-else size="mini" :value="cover[key]">
-                <template v-slot:prepend>{{ key }}:</template>
-              </el-input>
-            </el-row>
-          </el-card>
+              </el-row>
+            </el-card>
+          </div>
           <el-button
             size="small"
             icon="el-icon-minus"
@@ -196,14 +198,19 @@ export default {
       if (type === 'string') {
         this.formData.itemList.push(this.formData.itemVal)
       } else if (type === 'object') {
-        const styleProperties = this.formData.itemObj.style.trim().split(';')
-        const item = {}
-        styleProperties.forEach(property => {
-          const [key, val] = property.trim().split(':')
-          item[key.trim()] = val.trim()
-        })
+        const styleProperties =
+          this.formData.itemObj.style && this.formData.itemObj.style.trim().split(';')
+        const item = Object.assign({}, this.formData.itemObj)
+
+        if (Array.isArray(styleProperties)) {
+          styleProperties.forEach(property => {
+            console.log(property)
+            const [key, val] = property.trim().split(':')
+            item[key.trim()] = val.trim()
+          })
+        }
+
         this.formData.itemList.push(item)
-        console.log(this.formData.itemList)
       }
     },
     removeProperty(index) {
